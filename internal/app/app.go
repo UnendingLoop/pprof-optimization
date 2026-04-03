@@ -13,6 +13,7 @@ import (
 	"syscall"
 	"time"
 
+	_ "net/http/pprof"
 	"orderservice/config"
 	handler "orderservice/internal/api"
 	"orderservice/internal/cache"
