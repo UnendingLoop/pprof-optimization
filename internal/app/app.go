@@ -41,8 +41,8 @@ func NewApplication(conf config.Config) *App {
 // Run -
 func (a *App) Run() {
 	// подключаемся к базе
-	db := db.ConnectPostgres(a.cfg.DSN)
-	sqlDB, err := db.DB()
+	appDB := db.ConnectPostgres(a.cfg.DSN, config.GetConfig().GlobalMode)
+	sqlDB, err := appDB.DB()
 	if err != nil {
 		log.Fatalf("Failed to retrieve sql.DB: %v", err)
 	}
@@ -53,7 +53,7 @@ func (a *App) Run() {
 	}()
 
 	// создаем экземпляр repository и прогреваем кэш
-	repo := repository.NewOrderRepository(db, a.cfg.DSN)
+	repo := repository.NewOrderRepository(appDB, a.cfg.DSN)
 	orderMap, err := cache.CreateAndWarmUpOrderCache(repo, a.cfg.CacheSize)
 	if err != nil {
 		log.Fatalf("Failed to load cache: %v", err)
@@ -69,7 +69,7 @@ func (a *App) Run() {
 	r := chi.NewRouter()
 	r.Get("/order/{uid}", hndlr.GetOrderInfo)
 	r.Get("/order/", hndlr.GetOrderInfo)
-	r.Handle("/debug/pprof/", http.DefaultServeMux)
+	r.Handle("/debug/pprof/*", http.DefaultServeMux)
 	a.srv = config.LoadSrvConfig(r, a.cfg.AppPort)
 
 	// запускаем сервер в отдельной горутине, чтобы можно было:

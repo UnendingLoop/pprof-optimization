@@ -8,6 +8,7 @@ import (
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 var models = []any{ // the order of tables is important
@@ -18,8 +19,17 @@ var models = []any{ // the order of tables is important
 }
 
 // ConnectPostgres creates connection to Postres and runs automigration using structs from order.go
-func ConnectPostgres(dsn string) *gorm.DB {
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+func ConnectPostgres(dsn string, mode string) *gorm.DB {
+	var dbLog logger.Interface
+	switch mode {
+	case "production":
+		dbLog = logger.Default.LogMode(logger.Silent) //отключаем логирование на уровне горма если режим выставлен как "продакшн"
+	default:
+	}
+
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+		Logger: dbLog,
+	})
 	if err != nil {
 		log.Fatalf("Cannot open db: %v", err)
 	}

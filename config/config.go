@@ -20,6 +20,7 @@ type Config struct {
 	DLQTopic            string
 	LaunchMockGenerator bool
 	CacheSize           int
+	GlobalMode          string
 }
 
 // LoadSrvConfig -
@@ -82,6 +83,8 @@ func GetConfig() Config {
 		log.Fatal("DLQ_TOPIC cannot be equal to KAFKA_TOPIC")
 	}
 
+	gMode := os.Getenv("GLOBAL_MODE")
+
 	return Config{
 		DSN:                 dsn,
 		AppPort:             port,
@@ -90,5 +93,6 @@ func GetConfig() Config {
 		DLQTopic:            dlqTopic,
 		LaunchMockGenerator: mockStart,
 		CacheSize:           int(cacheSize),
+		GlobalMode:          gMode,
 	}
 }
