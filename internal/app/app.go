@@ -13,6 +13,7 @@ import (
 	"syscall"
 	"time"
 
+	_ "net/http/pprof"
 	"orderservice/config"
 	handler "orderservice/internal/api"
 	"orderservice/internal/cache"
@@ -68,6 +69,7 @@ func (a *App) Run() {
 	r := chi.NewRouter()
 	r.Get("/order/{uid}", hndlr.GetOrderInfo)
 	r.Get("/order/", hndlr.GetOrderInfo)
+	r.Handle("/debug/pprof/", http.DefaultServeMux)
 	a.srv = config.LoadSrvConfig(r, a.cfg.AppPort)
 
 	// запускаем сервер в отдельной горутине, чтобы можно было:
