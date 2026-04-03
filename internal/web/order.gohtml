@@ -1,0 +1,62 @@
+{{define "order.gohtml"}}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Информация по заказу</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		.sale-badge { color: red; font-weight: bold; }
+	</style>
+</head>
+<body class="container mt-5">
+	<h2>Информация по заказу</h2>
+	<table class="table table-bordered">
+		<tr><th>Order UID</th><td>{{.OrderUID}}</td></tr>
+		<tr><th>Track Number</th><td>{{.TrackNumber}}</td></tr>
+		<tr><th>Entry</th><td>{{.Entry}}</td></tr>
+	</table>
+
+	<h3>Delivery</h3>
+	<table class="table table-bordered">
+		<tr><th>Name</th><td>{{.Delivery.Name}}</td></tr>
+		<tr><th>Phone</th><td>{{.Delivery.Phone}}</td></tr>
+		<tr><th>Address</th><td>{{.Delivery.Address}}, {{.Delivery.City}}</td></tr>
+		<tr><th>Region</th><td>{{.Delivery.Region}}</td></tr>
+		<tr><th>Email</th><td>{{.Delivery.Email}}</td></tr>
+	</table>
+
+	<h3>Payment</h3>
+	<table class="table table-bordered">
+		<tr><th>Transaction</th><td>{{.Payment.Transaction}}</td></tr>
+		<tr><th>Bank</th><td>{{.Payment.Bank}}</td></tr>
+		<tr><th>Custom fee</th><td>{{.Payment.CustomFee}} {{.Payment.Currency}}</td></tr>
+		<tr><th>Delivery Cost</th><td>{{.Payment.DeliveryCost}} {{.Payment.Currency}}</td></tr>
+		<tr><th>Goods Total</th><td>{{.Payment.GoodsTotal}} {{.Payment.Currency}}</td></tr>
+		<tr><th>Total payment amount</th><td>{{.Payment.Amount}} {{.Payment.Currency}}</td></tr>
+	</table>
+
+	<h3>Items</h3>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Name</th><th>Brand</th><th>Price</th><th>Sale</th><th>Total Price</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{range .Items}}
+			<tr>
+				<td>{{.Name}}</td>
+				<td>{{.Brand}}</td>
+				<td>{{.Price}}</td>
+				<td><span class="sale-badge">{{.Sale}}%</span></td>
+				<td>{{.TotalPrice}}</td>
+			</tr>
+			{{end}}
+		</tbody>
+	</table>
+
+	<a href="/order/" class="btn btn-secondary">Назад к поиску</a>
+</body>
+</html>
+{{end}}
