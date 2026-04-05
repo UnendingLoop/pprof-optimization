@@ -54,9 +54,11 @@ func EmulateMsgSending(broker, topic string) {
 		log.Printf("Order #%d published to Kafka", counter)
 	}
 
-	// начинаем генерацию 10 заказов через Faker
+	// начинаем генерацию 2000 заказов через Faker
 	fmt.Println("\nInitiating fake orders generation...")
-	for i := range 10 {
+	time.Sleep(5 * time.Second)
+
+	for i := range 2000 {
 		order, err := json.Marshal(mocks.GenerateMockOrder())
 		if err != nil {
 			log.Printf("Fake order marshalling #%d failed: %v", i, err)
@@ -74,10 +76,10 @@ func EmulateMsgSending(broker, topic string) {
 				Value: order,
 			})
 		}
-
 		log.Printf("Fake order #%d published to Kafka\n", i)
-		time.Sleep(2 * time.Second)
 	}
+
+	fmt.Println("\nFinished fake orders generation!!!")
 }
 
 // WaitKafkaReady - timeout given to kafka-service for getting fully functional
