@@ -18,8 +18,11 @@ import (
 // mock json-data is read from file and generated using faker-package
 func EmulateMsgSending(broker, topic string) {
 	mockWriter := kafka.Writer{
-		Addr:  kafka.TCP(broker),
-		Topic: topic,
+		Addr:         kafka.TCP(broker),
+		Topic:        topic,
+		BatchSize:    1,
+		BatchTimeout: 5 * time.Millisecond,
+		Async:        false,
 	}
 
 	// чтение заказов из json-файла - 5 валидных, 2 дубликата и 3 невалидных
@@ -36,7 +39,6 @@ func EmulateMsgSending(broker, topic string) {
 	scanner := bufio.NewScanner(file)
 	counter := 0
 	for scanner.Scan() {
-		time.Sleep(1 * time.Second)
 		counter++
 		line := scanner.Bytes()
 		err = mockWriter.WriteMessages(context.Background(), kafka.Message{
@@ -44,8 +46,8 @@ func EmulateMsgSending(broker, topic string) {
 		})
 		for err != nil {
 			log.Printf("Failed to publish test order #%d: %v", counter, err)
+			time.Sleep(100 * time.Millisecond)
 			log.Printf("Retrying to send order #%d...", counter)
-			time.Sleep(5 * time.Second)
 			err = mockWriter.WriteMessages(context.Background(), kafka.Message{
 				Value: line,
 			})
@@ -54,11 +56,11 @@ func EmulateMsgSending(broker, topic string) {
 		log.Printf("Order #%d published to Kafka", counter)
 	}
 
-	// начинаем генерацию 2000 заказов через Faker
+	// начинаем генерацию 15000 заказов через Faker
 	fmt.Println("\nInitiating fake orders generation...")
-	time.Sleep(5 * time.Second)
+	time.Sleep(1 * time.Second)
 
-	for i := range 2000 {
+	for i := range 15000 {
 		order, err := json.Marshal(mocks.GenerateMockOrder())
 		if err != nil {
 			log.Printf("Fake order marshalling #%d failed: %v", i, err)
@@ -70,8 +72,8 @@ func EmulateMsgSending(broker, topic string) {
 		})
 		for err != nil {
 			log.Printf("Failed to publish fake order #%d: %v", i, err)
+			time.Sleep(100 * time.Millisecond)
 			log.Printf("Retrying to send fake order #%d...", i)
-			time.Sleep(5 * time.Second)
 			err = mockWriter.WriteMessages(context.Background(), kafka.Message{
 				Value: order,
 			})
