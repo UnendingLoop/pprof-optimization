@@ -1,0 +1,290 @@
+File: orderservice
+Build ID: de62ac89963afdcde1015fe768f7da2c9809b190
+Type: cpu
+Time: 2026-04-05 16:44:04 CEST
+Duration: 60.10s, Total samples = 36.02s (59.94%)
+Showing nodes accounting for 26.79s, 74.38% of 36.02s total
+Dropped 882 nodes (cum <= 0.18s)
+      flat  flat%   sum%        cum   cum%
+     7.89s 21.90% 21.90%      7.89s 21.90%  internal/runtime/syscall.Syscall6
+     2.70s  7.50% 29.40%      2.70s  7.50%  runtime.nanotime (inline)
+     2.08s  5.77% 35.17%      2.08s  5.77%  runtime.futex
+     1.45s  4.03% 39.20%      1.45s  4.03%  time.runtimeNow
+     1.30s  3.61% 42.81%      2.92s  8.11%  runtime.scanobject
+     0.55s  1.53% 44.34%      0.55s  1.53%  runtime.memclrNoHeapPointers
+     0.53s  1.47% 45.81%      0.53s  1.47%  runtime.usleep
+     0.52s  1.44% 47.25%      0.52s  1.44%  runtime.nextFreeFast (inline)
+     0.47s  1.30% 48.56%      0.47s  1.30%  aeshashbody
+     0.47s  1.30% 49.86%      0.73s  2.03%  runtime.findObject
+     0.43s  1.19% 51.05%      0.85s  2.36%  github.com/go-faker/faker/v4.(*safeSource).Int63
+     0.37s  1.03% 52.08%      0.80s  2.22%  internal/runtime/maps.(*Map).getWithoutKeySmallFastStr
+     0.37s  1.03% 53.11%      0.37s  1.03%  runtime.memmove
+     0.32s  0.89% 54.00%      0.34s  0.94%  runtime.(*mspan).writeHeapBitsSmall
+     0.29s  0.81% 54.80%      1.18s  3.28%  math/rand.(*Rand).Int31n
+     0.29s  0.81% 55.61%      1.90s  5.27%  runtime.mallocgcSmallScanNoHeader
+     0.25s  0.69% 56.30%      1.14s  3.16%  runtime.mapaccess2_faststr
+     0.25s  0.69% 57.00%      1.10s  3.05%  runtime.stealWork
+     0.24s  0.67% 57.66%      0.25s  0.69%  runtime.spanOf (inline)
+     0.22s  0.61% 58.27%      0.22s  0.61%  runtime.typePointers.nextFast (inline)
+     0.21s  0.58% 58.86%      0.22s  0.61%  math/rand.(*rngSource).Uint64 (inline)
+     0.19s  0.53% 59.38%      0.86s  2.39%  gorm.io/gorm/callbacks.ConvertToCreateValues
+     0.19s  0.53% 59.91%      0.19s  0.53%  reflect.Value.Field
+     0.19s  0.53% 60.44%      3.01s  8.36%  runtime.mallocgc
+     0.18s   0.5% 60.94%      1.76s  4.89%  github.com/go-faker/faker/v4.decodeTags
+     0.16s  0.44% 61.38%      5.59s 15.52%  runtime.findRunnable
+     0.15s  0.42% 61.80%      0.25s  0.69%  reflect.StructTag.Lookup
+     0.15s  0.42% 62.22%      1.24s  3.44%  runtime.newobject
+     0.14s  0.39% 62.60%      1.66s  4.61%  math/rand.(*Rand).Perm
+     0.14s  0.39% 62.99%      0.20s  0.56%  runtime.unlock2
+     0.13s  0.36% 63.35%      0.41s  1.14%  gorm.io/gorm.(*Statement).SelectAndOmitColumns
+     0.11s  0.31% 63.66%      3.35s  9.30%  runtime.gcDrain
+     0.10s  0.28% 63.94%      0.25s  0.69%  runtime.mapaccess1_faststr
+     0.10s  0.28% 64.21%      0.19s  0.53%  runtime.scanblock
+     0.10s  0.28% 64.49%      0.31s  0.86%  runtime.selectgo
+     0.09s  0.25% 64.74%      0.19s  0.53%  database/sql.driverArgsConnLocked
+     0.09s  0.25% 64.99%      0.45s  1.25%  runtime.greyobject
+     0.09s  0.25% 65.24%      0.41s  1.14%  runtime.mapassign_faststr
+     0.08s  0.22% 65.46%      0.66s  1.83%  gorm.io/gorm/clause.Clause.Build
+     0.08s  0.22% 65.69%      0.61s  1.69%  runtime.runqgrab
+     0.07s  0.19% 65.88%      6.03s 16.74%  gorm.io/gorm/callbacks.RegisterDefaultCallbacks.Create.func3
+     0.07s  0.19% 66.07%      1.25s  3.47%  math/rand.(*Rand).Intn
+     0.06s  0.17% 66.24%      8.17s 22.68%  database/sql.withLock
+     0.06s  0.17% 66.41%      0.55s  1.53%  encoding/json.(*decodeState).object
+     0.06s  0.17% 66.57%      1.38s  3.83%  github.com/jackc/pgx/v5/pgproto3.(*chunkReader).Next
+     0.06s  0.17% 66.74%      0.25s  0.69%  gorm.io/gorm.(*Statement).QuoteTo
+     0.06s  0.17% 66.91%     12.85s 35.67%  gorm.io/gorm.(*processor).Execute
+     0.06s  0.17% 67.07%      1.15s  3.19%  gorm.io/gorm.Scan
+     0.06s  0.17% 67.24%      0.28s  0.78%  math/rand.(*rngSource).Int63
+     0.06s  0.17% 67.41%      0.37s  1.03%  runtime.(*mcentral).cacheSpan
+     0.06s  0.17% 67.57%      1.29s  3.58%  runtime.(*timers).check
+     0.06s  0.17% 67.74%      0.22s  0.61%  runtime.casgstatus
+     0.06s  0.17% 67.91%      0.38s  1.05%  runtime.growslice
+     0.05s  0.14% 68.05%      6.71s 18.63%  database/sql.(*DB).queryDC
+     0.05s  0.14% 68.18%      1.71s  4.75%  github.com/go-faker/faker/v4.RandomInt
+     0.05s  0.14% 68.32%      0.31s  0.86%  github.com/go-playground/validator.(*Validate).parseFieldTagsRecursive
+     0.05s  0.14% 68.46%      1.53s  4.25%  runtime.netpoll
+     0.04s  0.11% 68.57%      0.27s  0.75%  database/sql.(*Rows).close
+     0.04s  0.11% 68.68%      4.13s 11.47%  github.com/go-faker/faker/v4.getFakedValue
+     0.04s  0.11% 68.80%      0.61s  1.69%  github.com/go-playground/validator.(*Validate).extractStructCache
+     0.04s  0.11% 68.91%      1.50s  4.16%  github.com/jackc/pgx/v5/pgproto3.(*Frontend).Receive
+     0.04s  0.11% 69.02%      0.25s  0.69%  github.com/jackc/pgx/v5/pgtype.(*Map).Encode
+     0.04s  0.11% 69.13%      0.22s  0.61%  github.com/jackc/pgx/v5/stdlib.(*Rows).Next
+     0.04s  0.11% 69.24%      0.45s  1.25%  gorm.io/gorm.(*DB).scanIntoStruct
+     0.04s  0.11% 69.35%      0.46s  1.28%  runtime.mallocgcSmallNoscan
+     0.04s  0.11% 69.46%      0.36s     1%  runtime.reentersyscall
+     0.04s  0.11% 69.57%      0.44s  1.22%  strings.genSplit
+     0.04s  0.11% 69.68%      6.51s 18.07%  syscall.RawSyscall6
+     0.03s 0.083% 69.77%      0.38s  1.05%  github.com/go-playground/validator.New
+     0.03s 0.083% 69.85%      1.30s  3.61%  github.com/jackc/pgx/v5/pgconn/internal/bgreader.(*BGReader).Read
+     0.03s 0.083% 69.93%      4.33s 12.02%  github.com/jackc/pgx/v5/pgproto3.(*Frontend).Flush
+     0.03s 0.083% 70.02%      0.24s  0.67%  gorm.io/gorm.(*Statement).AddClause
+     0.03s 0.083% 70.10%      0.40s  1.11%  gorm.io/gorm/callbacks.BuildQuerySQL
+     0.03s 0.083% 70.18%      5.67s 15.74%  internal/poll.(*FD).Write
+     0.03s 0.083% 70.27%      0.88s  2.44%  math/rand.(*Rand).Int63 (inline)
+     0.03s 0.083% 70.35%     16.98s 47.14%  orderservice/internal/service.(*orderService).AddNewOrder
+     0.03s 0.083% 70.43%      0.53s  1.47%  runtime.(*mcache).refill
+     0.03s 0.083% 70.52%      0.20s  0.56%  runtime.convT
+     0.03s 0.083% 70.60%      0.97s  2.69%  runtime.futexsleep
+     0.03s 0.083% 70.68%      0.37s  1.03%  runtime.heapSetTypeNoHeader (inline)
+     0.03s 0.083% 70.77%      0.64s  1.78%  runtime.runqsteal
+     0.03s 0.083% 70.85%      6.27s 17.41%  runtime.schedule
+     0.03s 0.083% 70.93%      5.16s 14.33%  runtime.systemstack
+     0.03s 0.083% 71.02%      7.04s 19.54%  syscall.Syscall
+     0.02s 0.056% 71.07%      0.27s  0.75%  bufio.(*Reader).Peek
+     0.02s 0.056% 71.13%      0.73s  2.03%  bufio.(*Writer).Flush
+     0.02s 0.056% 71.18%      6.02s 16.71%  database/sql.(*DB).queryDC.func1
+     0.02s 0.056% 71.24%      0.28s  0.78%  encoding/json.(*decodeState).array
+     0.02s 0.056% 71.29%      0.62s  1.72%  github.com/go-playground/validator.(*validate).traverseField
+     0.02s 0.056% 71.35%      0.84s  2.33%  github.com/go-playground/validator.(*validate).validateStruct
+     0.02s 0.056% 71.40%      5.71s 15.85%  github.com/jackc/pgx/v5.(*Conn).Query
+     0.02s 0.056% 71.46%      1.68s  4.66%  github.com/jackc/pgx/v5.(*Conn).exec
+     0.02s 0.056% 71.52%      0.35s  0.97%  github.com/jackc/pgx/v5.(*ExtendedQueryBuilder).Build
+     0.02s 0.056% 71.57%      0.32s  0.89%  github.com/jackc/pgx/v5.(*ExtendedQueryBuilder).appendParam
+     0.02s 0.056% 71.63%      1.34s  3.72%  github.com/jackc/pgx/v5/pgconn.(*ResultReader).readUntilRowDescription
+     0.02s 0.056% 71.68%      5.84s 16.21%  github.com/jackc/pgx/v5/stdlib.(*Conn).QueryContext
+     0.02s 0.056% 71.74%      0.41s  1.14%  github.com/segmentio/kafka-go.(*partitionWriter).writeBatch
+     0.02s 0.056% 71.79%      0.95s  2.64%  gorm.io/gorm.(*DB).Begin
+     0.02s 0.056% 71.85%      0.75s  2.08%  gorm.io/gorm.(*Statement).Build
+     0.02s 0.056% 71.90%      0.30s  0.83%  gorm.io/gorm.(*Statement).clone
+     0.02s 0.056% 71.96%      4.53s 12.58%  gorm.io/gorm/callbacks.saveAssociations
+     0.02s 0.056% 72.02%      0.70s  1.94%  gorm.io/gorm/logger.(*logger).Trace
+     0.02s 0.056% 72.07%      1.52s  4.22%  internal/poll.(*FD).Read
+     0.02s 0.056% 72.13%      0.25s  0.69%  internal/runtime/maps.(*Map).growToSmall
+     0.02s 0.056% 72.18%      1.41s  3.91%  io.ReadAtLeast
+     0.02s 0.056% 72.24%      0.89s  2.47%  math/rand.(*Rand).Int31 (inline)
+     0.02s 0.056% 72.29%      5.46s 15.16%  net.(*netFD).Write
+     0.02s 0.056% 72.35%     17.16s 47.64%  orderservice/internal/kafka.StartConsumer
+     0.02s 0.056% 72.40%     12.74s 35.37%  orderservice/internal/repository.(*orderRepository).AddNewOrder.func1
+     0.02s 0.056% 72.46%      0.21s  0.58%  reflect.packEface
+     0.02s 0.056% 72.52%      0.23s  0.64%  reflect.valueInterface
+     0.02s 0.056% 72.57%      0.31s  0.86%  runtime.bgsweep
+     0.02s 0.056% 72.63%      0.20s  0.56%  runtime.chansend
+     0.02s 0.056% 72.68%      1.16s  3.22%  runtime.futexwakeup
+     0.02s 0.056% 72.74%      3.50s  9.72%  runtime.gcBgMarkWorker
+     0.02s 0.056% 72.79%      0.24s  0.67%  runtime.makemap_small
+     0.02s 0.056% 72.85%      0.90s  2.50%  runtime.makeslice
+     0.02s 0.056% 72.90%      0.21s  0.58%  runtime.mallocgcSmallScanHeader
+     0.02s 0.056% 72.96%      6.38s 17.71%  runtime.mcall
+     0.02s 0.056% 73.01%      0.73s  2.03%  runtime.newproc.func1
+     0.02s 0.056% 73.07%      0.96s  2.67%  runtime.notesleep
+     0.02s 0.056% 73.13%      0.38s  1.05%  runtime.pidleget
+     0.02s 0.056% 73.18%      0.21s  0.58%  runtime.ready
+     0.02s 0.056% 73.24%      1.37s  3.80%  runtime.wakep
+     0.02s 0.056% 73.29%      1.42s  3.94%  syscall.Read (inline)
+     0.02s 0.056% 73.35%      1.47s  4.08%  time.Now
+     0.01s 0.028% 73.38%      0.81s  2.25%  database/sql.(*DB).BeginTx
+     0.01s 0.028% 73.40%      0.58s  1.61%  database/sql.(*DB).beginDC.func1
+     0.01s 0.028% 73.43%      0.21s  0.58%  database/sql.(*Rows).Close
+     0.01s 0.028% 73.46%      0.57s  1.58%  database/sql.(*Rows).initContextClose
+     0.01s 0.028% 73.49%      5.74s 15.94%  database/sql.(*Tx).QueryContext
+     0.01s 0.028% 73.51%      0.56s  1.55%  encoding/json.(*decodeState).unmarshal
+     0.01s 0.028% 73.54%      0.37s  1.03%  github.com/go-faker/faker/v4.singleFakeData
+     0.01s 0.028% 73.57%      2.10s  5.83%  github.com/go-faker/faker/v4.userDefinedArray
+     0.01s 0.028% 73.60%      0.89s  2.47%  github.com/go-playground/validator.(*Validate).StructCtx
+     0.01s 0.028% 73.63%      0.40s  1.11%  github.com/jackc/pgx/v5.(*Conn).getRows
+     0.01s 0.028% 73.65%      0.26s  0.72%  github.com/jackc/pgx/v5.(*ExtendedQueryBuilder).encodeExtendedParamValue
+     0.01s 0.028% 73.68%      0.53s  1.47%  github.com/jackc/pgx/v5.(*dbTx).Commit
+     0.01s 0.028% 73.71%      5.23s 14.52%  github.com/jackc/pgx/v5/pgconn.(*PgConn).execExtendedSuffix
+     0.01s 0.028% 73.74%      0.65s  1.80%  github.com/jackc/pgx/v5/stdlib.(*Conn).ExecContext
+     0.01s 0.028% 73.76%      1.35s  3.75%  github.com/segmentio/kafka-go.(*Conn).offsetCommit
+     0.01s 0.028% 73.79%      0.83s  2.30%  github.com/segmentio/kafka-go.(*Conn).writeRequest
+     0.01s 0.028% 73.82%      1.45s  4.03%  github.com/segmentio/kafka-go.(*Generation).CommitOffsets
+     0.01s 0.028% 73.85%      0.31s  0.86%  github.com/segmentio/kafka-go.(*Writer).WriteMessages
+     0.01s 0.028% 73.88%      0.66s  1.83%  github.com/segmentio/kafka-go.(*conn).roundTrip
+     0.01s 0.028% 73.90%      0.20s  0.56%  gorm.io/gorm.(*DB).getInstance
+     0.01s 0.028% 73.93%      0.19s  0.53%  gorm.io/gorm.(*Statement).QuoteTo.func1 (inline)
+     0.01s 0.028% 73.96%      4.74s 13.16%  gorm.io/gorm/callbacks.RegisterDefaultCallbacks.SaveAfterAssociations.func4
+     0.01s 0.028% 73.99%      0.28s  0.78%  gorm.io/gorm/schema.(*Field).setupValuerAndSetter.func1
+     0.01s 0.028% 74.01%      0.21s  0.58%  internal/poll.setDeadlineImpl
+     0.01s 0.028% 74.04%      1.43s  3.97%  internal/runtime/syscall.EpollWait
+     0.01s 0.028% 74.07%      0.46s  1.28%  log.(*Logger).output
+     0.01s 0.028% 74.10%      5.47s 15.19%  net.(*conn).Write
+     0.01s 0.028% 74.13%      0.24s  0.67%  os.(*File).write (inline)
+     0.01s 0.028% 74.15%      0.58s  1.61%  runtime.(*mcache).nextFree
+     0.01s 0.028% 74.18%      0.38s  1.05%  runtime.entersyscall
+     0.01s 0.028% 74.21%      0.97s  2.69%  runtime.mPark (inline)
+     0.01s 0.028% 74.24%      3.87s 10.74%  runtime.park_m
+     0.01s 0.028% 74.26%      0.53s  1.47%  runtime.resetspinning
+     0.01s 0.028% 74.29%      0.97s  2.69%  runtime.startm
+     0.01s 0.028% 74.32%      1.07s  2.97%  runtime.stopm
+     0.01s 0.028% 74.35%      0.21s  0.58%  runtime.unlockWithRank (inline)
+     0.01s 0.028% 74.38%      0.31s  0.86%  time.(*Timer).Reset
+         0     0% 74.38%      0.25s  0.69%  bufio.(*Reader).fill
+         0     0% 74.38%      0.80s  2.22%  database/sql.(*DB).BeginTx.func1
+         0     0% 74.38%      1.05s  2.92%  database/sql.(*DB).QueryContext
+         0     0% 74.38%      1.05s  2.92%  database/sql.(*DB).QueryContext.func1
+         0     0% 74.38%      0.80s  2.22%  database/sql.(*DB).begin
+         0     0% 74.38%      0.72s  2.00%  database/sql.(*DB).beginDC
+         0     0% 74.38%      0.69s  1.92%  database/sql.(*DB).execDC
+         0     0% 74.38%      0.68s  1.89%  database/sql.(*DB).execDC.func2
+         0     0% 74.38%      1.05s  2.92%  database/sql.(*DB).query
+         0     0% 74.38%      1.85s  5.14%  database/sql.(*DB).retry
+         0     0% 74.38%      0.41s  1.14%  database/sql.(*Rows).Next
+         0     0% 74.38%      0.25s  0.69%  database/sql.(*Rows).Next.func1
+         0     0% 74.38%      0.25s  0.69%  database/sql.(*Rows).nextLocked
+         0     0% 74.38%      0.56s  1.55%  database/sql.(*Tx).Commit
+         0     0% 74.38%      0.53s  1.47%  database/sql.(*Tx).Commit.func1
+         0     0% 74.38%      0.70s  1.94%  database/sql.(*Tx).ExecContext
+         0     0% 74.38%      0.57s  1.58%  database/sql.ctxDriverBegin
+         0     0% 74.38%      0.65s  1.80%  database/sql.ctxDriverExec
+         0     0% 74.38%      5.84s 16.21%  database/sql.ctxDriverQuery
+         0     0% 74.38%      0.55s  1.53%  encoding/json.(*decodeState).value
+         0     0% 74.38%      0.67s  1.86%  encoding/json.Unmarshal
+         0     0% 74.38%      4.23s 11.74%  github.com/go-faker/faker/v4.FakeData
+         0     0% 74.38%      0.19s  0.53%  github.com/go-faker/faker/v4.UUIDHyphenated (inline)
+         0     0% 74.38%      0.30s  0.83%  github.com/go-faker/faker/v4.initMapperTagWithOption
+         0     0% 74.38%      0.34s  0.94%  github.com/go-faker/faker/v4.initOption
+         0     0% 74.38%      2.87s  7.97%  github.com/go-faker/faker/v4.setDataWithTag
+         0     0% 74.38%      1.78s  4.94%  github.com/go-faker/faker/v4.userDefinedNumber
+         0     0% 74.38%      0.89s  2.47%  github.com/go-playground/validator.(*Validate).Struct (inline)
+         0     0% 74.38%      0.57s  1.58%  github.com/jackc/pgx/v5.(*Conn).BeginTx
+         0     0% 74.38%      1.68s  4.66%  github.com/jackc/pgx/v5.(*Conn).Exec
+         0     0% 74.38%      0.59s  1.64%  github.com/jackc/pgx/v5.(*Conn).execPrepared
+         0     0% 74.38%      1.05s  2.92%  github.com/jackc/pgx/v5.(*Conn).execSimpleProtocol
+         0     0% 74.38%      0.23s  0.64%  github.com/jackc/pgx/v5/pgconn.(*MultiResultReader).NextResult
+         0     0% 74.38%      0.22s  0.61%  github.com/jackc/pgx/v5/pgconn.(*MultiResultReader).receiveMessage
+         0     0% 74.38%      0.82s  2.28%  github.com/jackc/pgx/v5/pgconn.(*PgConn).Exec
+         0     0% 74.38%      5.33s 14.80%  github.com/jackc/pgx/v5/pgconn.(*PgConn).ExecPrepared
+         0     0% 74.38%      0.29s  0.81%  github.com/jackc/pgx/v5/pgconn.(*PgConn).enterPotentialWriteReadDeadlock (inline)
+         0     0% 74.38%      4.66s 12.94%  github.com/jackc/pgx/v5/pgconn.(*PgConn).flushWithPotentialWriteReadDeadlock
+         0     0% 74.38%      1.50s  4.16%  github.com/jackc/pgx/v5/pgconn.(*PgConn).peekMessage
+         0     0% 74.38%      0.26s  0.72%  github.com/jackc/pgx/v5/pgconn.(*PgConn).receiveMessage
+         0     0% 74.38%      0.57s  1.58%  github.com/jackc/pgx/v5/stdlib.(*Conn).BeginTx
+         0     0% 74.38%      0.53s  1.47%  github.com/jackc/pgx/v5/stdlib.wrapTx.Commit
+         0     0% 74.38%      1.34s  3.72%  github.com/segmentio/kafka-go.(*Conn).do
+         0     0% 74.38%      0.94s  2.61%  github.com/segmentio/kafka-go.(*Conn).doRequest
+         0     0% 74.38%      0.84s  2.33%  github.com/segmentio/kafka-go.(*Conn).offsetCommit.func1
+         0     0% 74.38%      0.25s  0.69%  github.com/segmentio/kafka-go.(*Conn).peekResponseSizeAndID
+         0     0% 74.38%      0.33s  0.92%  github.com/segmentio/kafka-go.(*Conn).waitResponse
+         0     0% 74.38%      1.34s  3.72%  github.com/segmentio/kafka-go.(*Conn).writeOperation (inline)
+         0     0% 74.38%      1.71s  4.75%  github.com/segmentio/kafka-go.(*Generation).Start.func1
+         0     0% 74.38%      1.71s  4.75%  github.com/segmentio/kafka-go.(*Reader).commitLoop
+         0     0% 74.38%      1.71s  4.75%  github.com/segmentio/kafka-go.(*Reader).commitLoopImmediate
+         0     0% 74.38%      1.45s  4.03%  github.com/segmentio/kafka-go.(*Reader).commitOffsetsWithRetry
+         0     0% 74.38%      1.71s  4.75%  github.com/segmentio/kafka-go.(*Reader).run.func3
+         0     0% 74.38%      0.26s  0.72%  github.com/segmentio/kafka-go.(*Reader).start.func1
+         0     0% 74.38%      0.22s  0.61%  github.com/segmentio/kafka-go.(*Writer).batchMessages
+         0     0% 74.38%      0.28s  0.78%  github.com/segmentio/kafka-go.(*Writer).produce
+         0     0% 74.38%      0.49s  1.36%  github.com/segmentio/kafka-go.(*Writer).spawn.func1
+         0     0% 74.38%      0.71s  1.97%  github.com/segmentio/kafka-go.(*conn).run
+         0     0% 74.38%      0.19s  0.53%  github.com/segmentio/kafka-go.(*partitionWriter).newWriteBatch
+         0     0% 74.38%      0.41s  1.14%  github.com/segmentio/kafka-go.(*partitionWriter).writeBatches
+         0     0% 74.38%      0.22s  0.61%  github.com/segmentio/kafka-go.(*partitionWriter).writeMessages
+         0     0% 74.38%      0.25s  0.69%  github.com/segmentio/kafka-go.(*reader).read
+         0     0% 74.38%      0.26s  0.72%  github.com/segmentio/kafka-go.(*reader).run
+         0     0% 74.38%      1.40s  3.89%  github.com/segmentio/kafka-go.(*timeoutCoordinator).offsetCommit
+         0     0% 74.38%      0.62s  1.72%  github.com/segmentio/kafka-go/protocol.(*Conn).RoundTrip
+         0     0% 74.38%      0.46s  1.28%  github.com/segmentio/kafka-go/protocol.(*Conn).Write
+         0     0% 74.38%      0.46s  1.28%  github.com/segmentio/kafka-go/protocol.(*pageBuffer).WriteTo
+         0     0% 74.38%      0.46s  1.28%  github.com/segmentio/kafka-go/protocol.(*pageBuffer).WriteTo.func1
+         0     0% 74.38%      0.62s  1.72%  github.com/segmentio/kafka-go/protocol.RoundTrip
+         0     0% 74.38%      0.61s  1.69%  github.com/segmentio/kafka-go/protocol.WriteRequest
+         0     0% 74.38%      0.46s  1.28%  github.com/segmentio/kafka-go/protocol.contiguousPages.scan
+         0     0% 74.38%      0.57s  1.58%  gorm.io/gorm.(*DB).Commit
+         0     0% 74.38%      7.41s 20.57%  gorm.io/gorm.(*DB).Create
+         0     0% 74.38%      3.66s 10.16%  gorm.io/gorm.(*DB).Find
+         0     0% 74.38%      1.90s  5.27%  gorm.io/gorm.(*DB).First
+         0     0% 74.38%      9.59s 26.62%  gorm.io/gorm.(*DB).FirstOrCreate
+         0     0% 74.38%      0.24s  0.67%  gorm.io/gorm.(*Statement).WriteQuoted
+         0     0% 74.38%      4.63s 12.85%  gorm.io/gorm/callbacks.Query
+         0     0% 74.38%      0.25s  0.69%  gorm.io/gorm/clause.Values.Build
+         0     0% 74.38%      7.07s 19.63%  internal/poll.ignoringEINTRIO (inline)
+         0     0% 74.38%      0.22s  0.61%  internal/runtime/maps.NewEmptyMap (inline)
+         0     0% 74.38%      0.25s  0.69%  internal/runtime/maps.newGroups (inline)
+         0     0% 74.38%      0.25s  0.69%  internal/runtime/maps.newarray
+         0     0% 74.38%      0.31s  0.86%  log.Printf (inline)
+         0     0% 74.38%      1.53s  4.25%  net.(*conn).Read
+         0     0% 74.38%      1.53s  4.25%  net.(*netFD).Read
+         0     0% 74.38%      5.17s 14.35%  orderservice/internal/kafka.EmulateMsgSending
+         0     0% 74.38%      4.63s 12.85%  orderservice/internal/mocks.GenerateMockOrder
+         0     0% 74.38%      1.74s  4.83%  orderservice/internal/mocks.init.0.func1
+         0     0% 74.38%     12.74s 35.37%  orderservice/internal/repository.(*orderRepository).AddNewOrder
+         0     0% 74.38%      2.01s  5.58%  orderservice/internal/repository.(*orderRepository).GetOrderByUID
+         0     0% 74.38%      2.01s  5.58%  orderservice/internal/service.(*orderService).GetOrderInfo
+         0     0% 74.38%      0.24s  0.67%  os.(*File).Write
+         0     0% 74.38%      0.25s  0.69%  reflect.StructTag.Get (inline)
+         0     0% 74.38%      0.23s  0.64%  reflect.Value.Interface (inline)
+         0     0% 74.38%      0.20s  0.56%  runtime.(*unwinder).next
+         0     0% 74.38%      0.19s  0.53%  runtime.callers
+         0     0% 74.38%      0.19s  0.53%  runtime.callers.func1
+         0     0% 74.38%      0.20s  0.56%  runtime.chansend1
+         0     0% 74.38%      0.25s  0.69%  runtime.entersyscall_sysmon
+         0     0% 74.38%      3.35s  9.30%  runtime.gcBgMarkWorker.func2
+         0     0% 74.38%      2.49s  6.91%  runtime.gcDrainMarkWorkerDedicated (inline)
+         0     0% 74.38%      0.86s  2.39%  runtime.gcDrainMarkWorkerIdle (inline)
+         0     0% 74.38%      2.48s  6.89%  runtime.goexit0
+         0     0% 74.38%      0.21s  0.58%  runtime.goready (inline)
+         0     0% 74.38%      0.33s  0.92%  runtime.markroot
+         0     0% 74.38%      0.25s  0.69%  runtime.newarray
+         0     0% 74.38%      0.73s  2.03%  runtime.newproc
+         0     0% 74.38%      1.16s  3.22%  runtime.notewakeup
+         0     0% 74.38%      0.37s  1.03%  runtime.pidlegetSpinning
+         0     0% 74.38%      0.21s  0.58%  runtime.send
+         0     0% 74.38%      0.21s  0.58%  runtime.unlock (inline)
+         0     0% 74.38%      0.38s  1.05%  strings.Split (inline)
+         0     0% 74.38%      5.64s 15.66%  syscall.Write (inline)
+         0     0% 74.38%      1.40s  3.89%  syscall.read
+         0     0% 74.38%      5.64s 15.66%  syscall.write
+         0     0% 74.38%      0.24s  0.67%  time.Since
+         0     0% 74.38%      0.55s  1.53%  time.runtimeNano
+         0     0% 74.38%      0.22s  0.61%  time.when

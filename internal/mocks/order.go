@@ -7,8 +7,6 @@ import (
 	"log"
 	"reflect"
 
-	"orderservice/internal/model"
-
 	"github.com/go-faker/faker/v4"
 )
 
@@ -24,14 +22,14 @@ func init() {
 }
 
 // GenerateMockOrder - generates valid mock orders(one order per call) on the spot.
-func GenerateMockOrder() *model.Order {
+/*func GenerateMockOrder() *model.Order {
 	var order model.Order
 	if err := faker.FakeData(&order); err != nil {
 		log.Printf("Failed faker order generation: %v", err)
+		return nil
 	}
 
-	order.OrderUID = "fake-" + faker.UUIDHyphenated()
-	order.Delivery.Phone = faker.Phonenumber()
+	order.OrderUID = uuid.NewString()
 
 	conformOrderUID(&order)
 	conformItems(order.Items)
@@ -65,3 +63,4 @@ func conformPayment(order *model.Order) {
 	}
 	order.Payment.Amount = order.Payment.GoodsTotal + order.Payment.DeliveryCost + order.Payment.CustomFee
 }
+*/

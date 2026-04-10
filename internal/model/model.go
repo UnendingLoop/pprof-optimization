@@ -39,7 +39,7 @@ type Delivery struct {
 	DID      *uint  `gorm:"primaryKey;autoIncrement;->" json:"-" faker:"-"`
 	OrderUID string `gorm:"index;not null" faker:"-"` // FK на Order.OrderUID
 	Name     string `gorm:"not null" json:"name" faker:"name" validate:"required"`
-	Phone    string `gorm:"not null" json:"phone" faker:"-" validate:"required"`
+	Phone    string `gorm:"not null" json:"phone" faker:"phone_number" validate:"required"`
 	Zip      string `gorm:"not null" json:"zip" faker:"word" validate:"required"`
 	City     string `gorm:"not null" json:"city" faker:"word" validate:"required"`
 	Address  string `gorm:"not null" json:"address" faker:"word" validate:"required"`

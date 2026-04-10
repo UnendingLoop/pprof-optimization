@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"runtime"
 	"sync"
 	"syscall"
 	"time"
@@ -107,6 +108,12 @@ func (a *App) Run() {
 	go launchInterruptListener(&a.WaitGroup, sig, kafkaCancel, a.srv)
 
 	a.Wait()
+
+	var m runtime.MemStats
+	runtime.ReadMemStats(&m)
+	fmt.Println("GC runs:", m.NumGC)
+	fmt.Println("GC pause:", m.PauseTotalNs)
+
 	log.Println("Exiting application...")
 }
 

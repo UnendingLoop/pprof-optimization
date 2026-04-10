@@ -27,15 +27,15 @@ func ConnectPostgres(dsn string, mode string) *gorm.DB {
 	default:
 	}
 
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+	orderDB, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
 		Logger: dbLog,
 	})
 	if err != nil {
 		log.Fatalf("Cannot open db: %v", err)
 	}
-	if err := db.AutoMigrate(models...); err != nil {
+	if err := orderDB.AutoMigrate(models...); err != nil {
 		log.Fatalf("Failed to migrate: %v", err)
 	}
 	log.Println("Connected to Postgres")
-	return db
+	return orderDB
 }

@@ -3,13 +3,9 @@ package kafka
 import (
 	"bufio"
 	"context"
-	"encoding/json"
-	"fmt"
 	"log"
 	"os"
 	"time"
-
-	"orderservice/internal/mocks"
 
 	"github.com/segmentio/kafka-go"
 )
@@ -25,8 +21,8 @@ func EmulateMsgSending(broker, topic string) {
 		Async:        false,
 	}
 
-	// чтение заказов из json-файла - 5 валидных, 2 дубликата и 3 невалидных
-	file, err := os.Open("./internal/kafka/mocks.jsonl")
+	// чтение 15000 фейковых заказов из json-файла
+	file, err := os.Open("./internal/kafka/newMockFinal.jsonl")
 	if err != nil {
 		log.Fatalf("Failed to open json-mocks file: %v\nExiting application.", err)
 	}
@@ -36,52 +32,55 @@ func EmulateMsgSending(broker, topic string) {
 		}
 	}()
 
+	sharedFakeOrders := make([][]byte, 0, 15001)
+
 	scanner := bufio.NewScanner(file)
-	counter := 0
+
 	for scanner.Scan() {
-		counter++
-		line := scanner.Bytes()
-		err = mockWriter.WriteMessages(context.Background(), kafka.Message{
-			Value: line,
-		})
-		for err != nil {
-			log.Printf("Failed to publish test order #%d: %v", counter, err)
-			time.Sleep(100 * time.Millisecond)
-			log.Printf("Retrying to send order #%d...", counter)
-			err = mockWriter.WriteMessages(context.Background(), kafka.Message{
-				Value: line,
-			})
-		}
-
-		log.Printf("Order #%d published to Kafka", counter)
-	}
-
-	// начинаем генерацию 15000 заказов через Faker
-	fmt.Println("\nInitiating fake orders generation...")
-	time.Sleep(1 * time.Second)
-
-	for i := range 15000 {
-		order, err := json.Marshal(mocks.GenerateMockOrder())
-		if err != nil {
-			log.Printf("Fake order marshalling #%d failed: %v", i, err)
+		line := append([]byte(nil), scanner.Bytes()...)
+		if err := scanner.Err(); err != nil {
+			log.Printf("Error reading line: %v", err)
 			continue
 		}
+		sharedFakeOrders = append(sharedFakeOrders, line)
+	}
+	log.Printf("Успешно прочитано %d строк из файла!", len(sharedFakeOrders))
 
-		err = mockWriter.WriteMessages(context.Background(), kafka.Message{
-			Value: order,
-		})
-		for err != nil {
-			log.Printf("Failed to publish fake order #%d: %v", i, err)
-			time.Sleep(100 * time.Millisecond)
-			log.Printf("Retrying to send fake order #%d...", i)
-			err = mockWriter.WriteMessages(context.Background(), kafka.Message{
-				Value: order,
-			})
-		}
-		log.Printf("Fake order #%d published to Kafka\n", i)
+	log.Println("Нагрузка через")
+	for i := 5; i > 0; i-- {
+		time.Sleep(1 * time.Second)
+		log.Println(i, "...")
 	}
 
-	fmt.Println("\nFinished fake orders generation!!!")
+	//Нагрузочное тестирование - 15К фейковых заказов через 5 горутин
+	workersN := 5
+	max := len(sharedFakeOrders)
+	discretion := max / workersN
+
+	for i := range workersN {
+		go func(n int) {
+			start := discretion * n
+			end := start + discretion
+			log.Printf("Goroutine #%d initiates sending messages to Kafka on indices [%d:%d]...", n, start, end)
+			counter := 0
+			for l, line := range sharedFakeOrders[start:end] {
+				err = mockWriter.WriteMessages(context.Background(), kafka.Message{
+					Value: line,
+				})
+				for err != nil {
+					log.Printf("Failed to publish fake order #%d: %v", l, err)
+					time.Sleep(50 * time.Millisecond)
+					log.Printf("Retrying to send order #%d...", l)
+					err = mockWriter.WriteMessages(context.Background(), kafka.Message{
+						Value: line,
+					})
+				}
+				counter++
+				log.Printf("Goroutine #%d sent order #%d - success!", n, l)
+			}
+			log.Printf("Goroutine #%d finished sending %d messages!", n, counter)
+		}(i)
+	}
 }
 
 // WaitKafkaReady - timeout given to kafka-service for getting fully functional
