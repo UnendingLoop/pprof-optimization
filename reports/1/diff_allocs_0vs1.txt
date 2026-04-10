@@ -1,0 +1,139 @@
+File: orderservice
+Build ID: 556c5df50ff62ad34c39489c0203282d1f28020e
+Type: alloc_space
+Time: 2026-04-06 15:06:39 CEST
+Showing nodes accounting for -1149516.03kB, 39.01% of 2946420.81kB total
+Dropped 359 nodes (cum <= 14732.10kB)
+      flat  flat%   sum%        cum   cum%
+-695013.44kB 23.59% 23.59% -695013.44kB 23.59%  math/rand.(*Rand).Perm
+-77319.48kB  2.62% 26.21% -77319.48kB  2.62%  github.com/go-faker/faker/v4/pkg/options.DefaultOption
+-51718.31kB  1.76% 27.97% -120844.91kB  4.10%  github.com/go-faker/faker/v4.GetNetworker (inline)
+-49152.84kB  1.67% 29.64% -49152.84kB  1.67%  strings.genSplit
+-28867.33kB  0.98% 30.62% -29380.45kB     1%  github.com/segmentio/kafka-go/protocol.newPage
+-26636.92kB   0.9% 31.52% -35854.05kB  1.22%  gorm.io/gorm.(*Statement).clone
+-26625.22kB   0.9% 32.42% -26625.22kB   0.9%  internal/sync.newEntryNode[go.shape.interface {},go.shape.interface {}] (inline)
+-22535.23kB  0.76% 33.19% -22535.23kB  0.76%  reflect.New
+-22081.87kB  0.75% 33.94% -22081.87kB  0.75%  regexp.(*bitState).reset
+21526.88kB  0.73% 33.21% -1058914.53kB 35.94%  orderservice/internal/kafka.EmulateMsgSending
+-21511.04kB  0.73% 33.94% -21511.04kB  0.73%  reflect.packEface
+17924.62kB  0.61% 33.33% 15872.01kB  0.54%  gorm.io/gorm.Scan
+-16384.25kB  0.56% 33.88% -59392.91kB  2.02%  github.com/go-faker/faker/v4.decodeTags
+-15891.38kB  0.54% 34.42% -19479.66kB  0.66%  encoding/json.Marshal
+-15878.61kB  0.54% 34.96% -15878.61kB  0.54%  reflect.cvtDirect
+14855.61kB   0.5% 34.46% 26120.51kB  0.89%  gorm.io/gorm.(*Statement).AddClause
+-12803.01kB  0.43% 34.89% -34315.25kB  1.16%  gorm.io/gorm.(*DB).getInstance
+-11777.48kB   0.4% 35.29% -26119.28kB  0.89%  gorm.io/gorm.(*DB).Session
+-11285.73kB  0.38% 35.68% -11285.73kB  0.38%  sync.(*Pool).pinSlow
+-10768.16kB  0.37% 36.04% -10768.16kB  0.37%  database/sql.driverArgsConnLocked
+-10244.27kB  0.35% 36.39% -1034332.50kB 35.10%  orderservice/internal/mocks.GenerateMockOrder
+-8705.33kB   0.3% 36.68% -8705.33kB   0.3%  internal/sync.newIndirectNode[go.shape.interface {},go.shape.interface {}] (inline)
+-7683.30kB  0.26% 36.95% -7683.30kB  0.26%  github.com/jackc/pgx/v5/stdlib.namedValueToInterface (inline)
+-7681.45kB  0.26% 37.21% -7681.45kB  0.26%  github.com/go-playground/validator.(*structCache).Set
+-7681.12kB  0.26% 37.47% -7681.12kB  0.26%  github.com/go-faker/faker/v4/pkg/slice.IntToString
+-7680.18kB  0.26% 37.73% -158734.29kB  5.39%  github.com/go-faker/faker/v4.initMapperTagWithOption
+-7168.71kB  0.24% 37.97% -19970.39kB  0.68%  github.com/go-playground/validator.(*Validate).extractStructCache
+-6661.36kB  0.23% 38.20% -6149.15kB  0.21%  gorm.io/gorm/callbacks.ConvertToCreateValues
+ 6656.95kB  0.23% 37.97%  6656.95kB  0.23%  strings.(*Builder).grow
+-5632.09kB  0.19% 38.16% -30209.21kB  1.03%  github.com/go-faker/faker/v4.(*mapperTagCustom).Store (inline)
+-4609.55kB  0.16% 38.32% -8706.21kB   0.3%  gorm.io/gorm.(*DB).Preload (inline)
+-4608.56kB  0.16% 38.48% -19982.66kB  0.68%  gorm.io/gorm/callbacks.saveAssociations
+ 4096.62kB  0.14% 38.34% -18998.25kB  0.64%  database/sql.(*DB).queryDC
+-3584.63kB  0.12% 38.46% -41509.62kB  1.41%  orderservice/internal/repository.(*orderRepository).AddNewOrder.func1
+-3584.59kB  0.12% 38.58% -7233.36kB  0.25%  regexp.(*Regexp).replaceAll
+-3072.05kB   0.1% 38.68% -6144.59kB  0.21%  context.WithCancel
+-2560.18kB 0.087% 38.77% -9730.80kB  0.33%  gorm.io/gorm.(*Statement).AddVar
+ 2048.94kB  0.07% 38.70% -68871.04kB  2.34%  orderservice/internal/service.(*orderService).AddNewOrder
+-2048.16kB  0.07% 38.77% -31429.69kB  1.07%  github.com/segmentio/kafka-go/protocol.WriteRequest
+-2048.11kB  0.07% 38.84%  8705.39kB   0.3%  gorm.io/gorm/callbacks.BuildQuerySQL
+-2048.05kB  0.07% 38.91% 14801.97kB   0.5%  gorm.io/gorm.(*DB).Find
+ 1536.02kB 0.052% 38.86% -13325.92kB  0.45%  gorm.io/gorm/callbacks.RegisterDefaultCallbacks.SaveAfterAssociations.func4
+-1536.02kB 0.052% 38.91% -693989.27kB 23.55%  orderservice/internal/mocks.init.0.func1
+-1025.48kB 0.035% 38.94% -6693.49kB  0.23%  github.com/jackc/pgx/v5/stdlib.(*Conn).QueryContext
+-1024.04kB 0.035% 38.98% -7168.74kB  0.24%  github.com/segmentio/kafka-go.(*Client).Produce
+-1024.02kB 0.035% 39.01% -11281.24kB  0.38%  gorm.io/gorm.(*DB).FirstOrCreate
+ -512.08kB 0.017% 39.03% -72455.41kB  2.46%  orderservice/internal/kafka.StartConsumer
+ -512.03kB 0.017% 39.05%  6657.50kB  0.23%  gorm.io/gorm/clause.OrderBy.Build
+  512.02kB 0.017% 39.03% -6721.30kB  0.23%  gorm.io/gorm/logger.ExplainSQL
+ -512.01kB 0.017% 39.05% -17036.86kB  0.58%  gorm.io/gorm.(*processor).Execute
+  512.01kB 0.017% 39.03% 27652.44kB  0.94%  orderservice/internal/kafka.EmulateMsgSending.func2
+     512kB 0.017% 39.01% -40997.62kB  1.39%  orderservice/internal/repository.(*orderRepository).AddNewOrder
+   -0.04kB 1.3e-06% 39.01% -20152.90kB  0.68%  github.com/go-playground/validator.(*validate).traverseField
+   -0.03kB 1.1e-06% 39.01% -9282.93kB  0.32%  gorm.io/gorm/logger.(*logger).Trace
+         0     0% 39.01% -20022.74kB  0.68%  database/sql.(*DB).queryDC.func1
+         0     0% 39.01% -15380.69kB  0.52%  database/sql.(*Tx).QueryContext
+         0     0% 39.01% -6693.49kB  0.23%  database/sql.ctxDriverQuery
+         0     0% 39.01% -12341.16kB  0.42%  database/sql.withLock
+         0     0% 39.01% -901708.78kB 30.60%  github.com/go-faker/faker/v4.FakeData
+         0     0% 39.01% -10241.31kB  0.35%  github.com/go-faker/faker/v4.Phone.phonenumber
+         0     0% 39.01% -59397.77kB  2.02%  github.com/go-faker/faker/v4.Phonenumber (inline)
+         0     0% 39.01% -695013.44kB 23.59%  github.com/go-faker/faker/v4.RandomInt
+         0     0% 39.01% -62981.69kB  2.14%  github.com/go-faker/faker/v4.UUIDHyphenated (inline)
+         0     0% 39.01% -13643.37kB  0.46%  github.com/go-faker/faker/v4.extractSliceLengthFromTag
+         0     0% 39.01% -835139.89kB 28.34%  github.com/go-faker/faker/v4.getFakedValue
+         0     0% 39.01% -166927.18kB  5.67%  github.com/go-faker/faker/v4.initOption
+         0     0% 39.01% -762931.96kB 25.89%  github.com/go-faker/faker/v4.setDataWithTag
+         0     0% 39.01% -122379.45kB  4.15%  github.com/go-faker/faker/v4.singleFakeData
+         0     0% 39.01% -498410.50kB 16.92%  github.com/go-faker/faker/v4.userDefinedArray
+         0     0% 39.01% -697573.33kB 23.68%  github.com/go-faker/faker/v4.userDefinedNumber
+         0     0% 39.01% -9216.17kB  0.31%  github.com/go-faker/faker/v4.userDefinedString
+         0     0% 39.01% -77319.48kB  2.62%  github.com/go-faker/faker/v4/pkg/options.BuildOptions
+         0     0% 39.01% -36040.42kB  1.22%  github.com/go-playground/validator.(*Validate).Struct (inline)
+         0     0% 39.01% -36040.42kB  1.22%  github.com/go-playground/validator.(*Validate).StructCtx
+         0     0% 39.01% -29369.43kB     1%  github.com/go-playground/validator.(*validate).validateStruct
+         0     0% 39.01%    -9399kB  0.32%  github.com/go-playground/validator.New.wrapFunc.func3
+         0     0% 39.01% -7350.97kB  0.25%  github.com/go-playground/validator.isEmail
+         0     0% 39.01% -6144.70kB  0.21%  github.com/segmentio/kafka-go.(*Client).roundTrip
+         0     0% 39.01% -31974.36kB  1.09%  github.com/segmentio/kafka-go.(*conn).roundTrip
+         0     0% 39.01% -31974.36kB  1.09%  github.com/segmentio/kafka-go.(*conn).run
+         0     0% 39.01% -31429.69kB  1.07%  github.com/segmentio/kafka-go/protocol.(*Conn).RoundTrip
+         0     0% 39.01% -29380.45kB     1%  github.com/segmentio/kafka-go/protocol.(*encoder).Write
+         0     0% 39.01% -29380.45kB     1%  github.com/segmentio/kafka-go/protocol.(*encoder).writeInt32 (inline)
+         0     0% 39.01% -29380.45kB     1%  github.com/segmentio/kafka-go/protocol.(*pageBuffer).Write
+         0     0% 39.01% -29380.45kB     1%  github.com/segmentio/kafka-go/protocol.(*pageBuffer).newPage (inline)
+         0     0% 39.01% -31429.69kB  1.07%  github.com/segmentio/kafka-go/protocol.RoundTrip
+         0     0% 39.01% -6721.30kB  0.23%  gorm.io/driver/postgres.Dialector.Explain
+         0     0% 39.01%  7169.53kB  0.24%  gorm.io/driver/postgres.Dialector.QuoteTo
+         0     0% 39.01% -18437.83kB  0.63%  gorm.io/gorm.(*DB).Begin
+         0     0% 39.01%  8198.24kB  0.28%  gorm.io/gorm.(*DB).Clauses
+         0     0% 39.01%   -36383kB  1.23%  gorm.io/gorm.(*DB).Create
+         0     0% 39.01%  8194.65kB  0.28%  gorm.io/gorm.(*Statement).AddClauseIfNotExists
+         0     0% 39.01% 11777.90kB   0.4%  gorm.io/gorm.(*Statement).Build
+         0     0% 39.01%  7169.53kB  0.24%  gorm.io/gorm.(*Statement).QuoteTo
+         0     0% 39.01%  7169.53kB  0.24%  gorm.io/gorm.(*Statement).QuoteTo.func1 (inline)
+         0     0% 39.01% -6145.94kB  0.21%  gorm.io/gorm.(*Statement).WriteByte (partial-inline)
+         0     0% 39.01%  9218.28kB  0.31%  gorm.io/gorm.(*Statement).WriteQuoted
+         0     0% 39.01% -6721.30kB  0.23%  gorm.io/gorm.(*processor).Execute.func1
+         0     0% 39.01% -17925.98kB  0.61%  gorm.io/gorm/callbacks.BeginTransaction
+         0     0% 39.01% -6191.48kB  0.21%  gorm.io/gorm/callbacks.Preload
+         0     0% 39.01% 27619.72kB  0.94%  gorm.io/gorm/callbacks.Query
+         0     0% 39.01% -6703.71kB  0.23%  gorm.io/gorm/callbacks.preload
+         0     0% 39.01% -6191.48kB  0.21%  gorm.io/gorm/callbacks.preloadEntryPoint
+         0     0% 39.01% 13826.34kB  0.47%  gorm.io/gorm/clause.Clause.Build
+         0     0% 39.01% -10753.42kB  0.36%  internal/sync.(*HashTrieMap[go.shape.interface {},go.shape.interface {}]).Range
+         0     0% 39.01% -31233.92kB  1.06%  internal/sync.(*HashTrieMap[go.shape.interface {},go.shape.interface {}]).Store (inline)
+         0     0% 39.01% -31233.92kB  1.06%  internal/sync.(*HashTrieMap[go.shape.interface {},go.shape.interface {}]).Swap
+         0     0% 39.01% -8705.33kB   0.3%  internal/sync.(*HashTrieMap[go.shape.interface {},go.shape.interface {}]).init (inline)
+         0     0% 39.01% -8705.33kB   0.3%  internal/sync.(*HashTrieMap[go.shape.interface {},go.shape.interface {}]).initSlow
+         0     0% 39.01% -6656.80kB  0.23%  internal/sync.(*HashTrieMap[go.shape.interface {},go.shape.interface {}]).iter
+         0     0% 39.01% -24577.12kB  0.83%  internal/sync.(*entry[go.shape.interface {},go.shape.interface {}]).swap
+         0     0% 39.01% -8753.45kB   0.3%  main.main
+         0     0% 39.01% -8753.45kB   0.3%  orderservice/internal/app.(*App).Run
+         0     0% 39.01% -7728.52kB  0.26%  orderservice/internal/cache.CreateAndWarmUpOrderCache
+         0     0% 39.01% -10241.31kB  0.35%  orderservice/internal/mocks.GenerateMockOrder.Phonenumber.func3
+         0     0% 39.01% -7728.52kB  0.26%  orderservice/internal/repository.(*orderRepository).GetAllOrders
+         0     0% 39.01% -19462.66kB  0.66%  reflect.Value.Convert
+         0     0% 39.01% -21511.04kB  0.73%  reflect.Value.Interface (inline)
+         0     0% 39.01% -21511.04kB  0.73%  reflect.valueInterface
+         0     0% 39.01% -12619.34kB  0.43%  regexp.(*Regexp).FindString
+         0     0% 39.01% -7350.97kB  0.25%  regexp.(*Regexp).MatchString (inline)
+         0     0% 39.01% -22594.99kB  0.77%  regexp.(*Regexp).backtrack
+         0     0% 39.01% -22594.99kB  0.77%  regexp.(*Regexp).doExecute
+         0     0% 39.01% -7350.97kB  0.25%  regexp.(*Regexp).doMatch (inline)
+         0     0% 39.01% -8765.61kB   0.3%  runtime.main
+         0     0% 39.01%  6656.95kB  0.23%  strings.(*Builder).Grow
+         0     0% 39.01% -41984.62kB  1.42%  strings.Split (inline)
+         0     0% 39.01% -7168.22kB  0.24%  strings.SplitN (inline)
+         0     0% 39.01% -10753.42kB  0.36%  sync.(*Map).Range (inline)
+         0     0% 39.01% -31233.92kB  1.06%  sync.(*Map).Store (inline)
+         0     0% 39.01% -9748.72kB  0.33%  sync.(*Pool).Get
+         0     0% 39.01% -11285.73kB  0.38%  sync.(*Pool).pin

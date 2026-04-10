@@ -1,0 +1,105 @@
+File: orderservice
+Build ID: 556c5df50ff62ad34c39489c0203282d1f28020e
+Type: inuse_space
+Time: 2026-04-06 15:06:24 CEST
+Showing nodes accounting for -1.38MB, 15.21% of 9.04MB total
+      flat  flat%   sum%        cum   cum%
+      -2MB 22.17% 22.17%       -2MB 22.17%  runtime.allocm
+    1.16MB 12.79%  9.37%     1.16MB 12.79%  runtime/pprof.StartCPUProfile
+   -0.52MB  5.71% 15.08%    -0.52MB  5.71%  regexp.(*bitState).reset
+   -0.51MB  5.66% 20.74%    -0.51MB  5.66%  reflect.growslice
+   -0.50MB  5.54% 26.28%    -0.50MB  5.54%  regexp/syntax.(*compiler).inst (inline)
+    0.50MB  5.54% 20.74%     0.50MB  5.54%  github.com/jackc/pgx/v5/pgproto3.NewFrontend
+   -0.50MB  5.53% 26.28%    -0.02MB  0.18%  orderservice/internal/service.(*orderService).AddNewOrder
+    0.50MB  5.53% 20.74%     0.50MB  5.53%  runtime.malg
+    0.50MB  5.53% 15.21%     0.50MB  5.53%  context.(*cancelCtx).Done
+   -0.50MB  5.53% 20.74%    -0.50MB  5.53%  runtime.(*scavengerState).init
+    0.50MB  5.53% 15.21%     0.50MB  5.53%  github.com/go-playground/validator.(*Validate).extractStructCache
+   -0.50MB  5.53% 20.74%    -0.50MB  5.53%  github.com/segmentio/kafka-go/protocol.structDecodeFuncOf
+    0.50MB  5.53% 15.21%     0.50MB  5.53%  github.com/jackc/pgx/v5/pgtype.scanPlanString.Scan
+         0     0% 15.21%     0.50MB  5.54%  database/sql.(*DB).Ping
+         0     0% 15.21%     0.50MB  5.54%  database/sql.(*DB).PingContext
+         0     0% 15.21%     0.50MB  5.54%  database/sql.(*DB).PingContext.func1
+         0     0% 15.21%     0.50MB  5.54%  database/sql.(*DB).conn
+         0     0% 15.21%     0.50MB  5.53%  database/sql.(*DB).connectionOpener
+         0     0% 15.21%     0.50MB  5.54%  database/sql.(*DB).retry
+         0     0% 15.21%     0.50MB  5.53%  database/sql.(*Rows).Next
+         0     0% 15.21%     0.50MB  5.53%  database/sql.(*Rows).Next.func1
+         0     0% 15.21%     0.50MB  5.53%  database/sql.(*Rows).nextLocked
+         0     0% 15.21%     0.50MB  5.53%  database/sql.withLock
+         0     0% 15.21%    -0.51MB  5.66%  encoding/json.(*decodeState).array
+         0     0% 15.21%    -0.51MB  5.66%  encoding/json.(*decodeState).object
+         0     0% 15.21%    -0.51MB  5.66%  encoding/json.(*decodeState).unmarshal
+         0     0% 15.21%    -0.51MB  5.66%  encoding/json.(*decodeState).value
+         0     0% 15.21%    -0.51MB  5.66%  encoding/json.Unmarshal
+         0     0% 15.21%     1.16MB 12.79%  github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+         0     0% 15.21%     1.16MB 12.79%  github.com/go-chi/chi/v5.(*Mux).routeHTTP
+         0     0% 15.21%    -0.51MB  5.66%  github.com/go-faker/faker/v4.init.0
+         0     0% 15.21%    -0.02MB  0.17%  github.com/go-playground/validator.(*Validate).Struct (inline)
+         0     0% 15.21%    -0.02MB  0.17%  github.com/go-playground/validator.(*Validate).StructCtx
+         0     0% 15.21%    -0.02MB  0.17%  github.com/go-playground/validator.(*validate).traverseField
+         0     0% 15.21%    -0.02MB  0.17%  github.com/go-playground/validator.(*validate).validateStruct
+         0     0% 15.21%    -0.52MB  5.71%  github.com/go-playground/validator.New.wrapFunc.func3
+         0     0% 15.21%    -0.52MB  5.71%  github.com/go-playground/validator.isEmail
+         0     0% 15.21%     0.50MB  5.54%  github.com/jackc/pgx/v5.ConnectConfig
+         0     0% 15.21%     0.50MB  5.54%  github.com/jackc/pgx/v5.connect
+         0     0% 15.21%     0.50MB  5.54%  github.com/jackc/pgx/v5/pgconn.ConnectConfig
+         0     0% 15.21%     0.50MB  5.54%  github.com/jackc/pgx/v5/pgconn.ParseConfigWithOptions.func1
+         0     0% 15.21%     0.50MB  5.54%  github.com/jackc/pgx/v5/pgconn.connectOne
+         0     0% 15.21%     0.50MB  5.54%  github.com/jackc/pgx/v5/pgconn.connectPreferred
+         0     0% 15.21%     0.50MB  5.53%  github.com/jackc/pgx/v5/stdlib.(*Rows).Next
+         0     0% 15.21%     0.50MB  5.53%  github.com/jackc/pgx/v5/stdlib.(*Rows).Next.func14
+         0     0% 15.21%     0.50MB  5.54%  github.com/jackc/pgx/v5/stdlib.connector.Connect
+         0     0% 15.21%    -0.50MB  5.54%  github.com/jinzhu/inflection.compile
+         0     0% 15.21%    -0.50MB  5.54%  github.com/jinzhu/inflection.init.0
+         0     0% 15.21%    -0.50MB  5.53%  github.com/segmentio/kafka-go/protocol.Register
+         0     0% 15.21%    -0.50MB  5.53%  github.com/segmentio/kafka-go/protocol.decodeFuncOf
+         0     0% 15.21%    -0.50MB  5.53%  github.com/segmentio/kafka-go/protocol.makeTypes
+         0     0% 15.21%    -0.50MB  5.53%  github.com/segmentio/kafka-go/protocol.typesOf
+         0     0% 15.21%    -0.50MB  5.53%  github.com/segmentio/kafka-go/protocol/offsetdelete.init.0
+         0     0% 15.21%     0.50MB  5.53%  gorm.io/gorm.(*DB).Find
+         0     0% 15.21%     0.50MB  5.53%  gorm.io/gorm.(*DB).FirstOrCreate
+         0     0% 15.21%     0.50MB  5.53%  gorm.io/gorm.(*processor).Execute
+         0     0% 15.21%     0.50MB  5.54%  gorm.io/gorm.Open
+         0     0% 15.21%     0.50MB  5.53%  gorm.io/gorm.Scan
+         0     0% 15.21%     0.50MB  5.53%  gorm.io/gorm/callbacks.Query
+         0     0% 15.21%     0.50MB  5.54%  main.main
+         0     0% 15.21%     1.16MB 12.79%  net/http.(*ServeMux).ServeHTTP
+         0     0% 15.21%     1.16MB 12.79%  net/http.(*conn).serve
+         0     0% 15.21%     1.16MB 12.79%  net/http.HandlerFunc.ServeHTTP
+         0     0% 15.21%     1.16MB 12.79%  net/http.serverHandler.ServeHTTP
+         0     0% 15.21%     1.16MB 12.79%  net/http/pprof.Profile
+         0     0% 15.21%     0.50MB  5.54%  orderservice/internal/app.(*App).Run
+         0     0% 15.21%     0.50MB  5.54%  orderservice/internal/db.ConnectPostgres
+         0     0% 15.21%    -0.02MB  0.18%  orderservice/internal/kafka.StartConsumer
+         0     0% 15.21%     0.50MB  5.53%  orderservice/internal/repository.(*orderRepository).AddNewOrder
+         0     0% 15.21%     0.50MB  5.53%  orderservice/internal/repository.(*orderRepository).AddNewOrder.func1
+         0     0% 15.21%    -0.51MB  5.66%  reflect.Value.Grow
+         0     0% 15.21%    -0.51MB  5.66%  reflect.Value.grow
+         0     0% 15.21%    -0.52MB  5.71%  regexp.(*Regexp).MatchString (inline)
+         0     0% 15.21%    -0.52MB  5.71%  regexp.(*Regexp).backtrack
+         0     0% 15.21%    -0.52MB  5.71%  regexp.(*Regexp).doExecute
+         0     0% 15.21%    -0.52MB  5.71%  regexp.(*Regexp).doMatch (inline)
+         0     0% 15.21%    -0.50MB  5.54%  regexp.Compile (inline)
+         0     0% 15.21%    -0.50MB  5.54%  regexp.MustCompile
+         0     0% 15.21%    -0.50MB  5.54%  regexp.compile
+         0     0% 15.21%    -0.50MB  5.54%  regexp/syntax.(*compiler).cap (inline)
+         0     0% 15.21%    -0.50MB  5.54%  regexp/syntax.(*compiler).compile
+         0     0% 15.21%    -0.50MB  5.54%  regexp/syntax.Compile
+         0     0% 15.21%    -0.50MB  5.53%  runtime.bgscavenge
+         0     0% 15.21%    -1.51MB 16.73%  runtime.doInit (inline)
+         0     0% 15.21%    -1.51MB 16.73%  runtime.doInit1
+         0     0% 15.21%    -1.01MB 11.19%  runtime.main
+         0     0% 15.21%    -1.50MB 16.63%  runtime.mcall
+         0     0% 15.21%    -0.50MB  5.54%  runtime.mstart
+         0     0% 15.21%    -0.50MB  5.54%  runtime.mstart0
+         0     0% 15.21%    -0.50MB  5.54%  runtime.mstart1
+         0     0% 15.21%       -2MB 22.17%  runtime.newm
+         0     0% 15.21%     0.50MB  5.53%  runtime.newproc.func1
+         0     0% 15.21%     0.50MB  5.53%  runtime.newproc1
+         0     0% 15.21%    -1.50MB 16.63%  runtime.park_m
+         0     0% 15.21%       -2MB 22.17%  runtime.resetspinning
+         0     0% 15.21%       -2MB 22.17%  runtime.schedule
+         0     0% 15.21%       -2MB 22.17%  runtime.startm
+         0     0% 15.21%     0.50MB  5.53%  runtime.systemstack
+         0     0% 15.21%       -2MB 22.17%  runtime.wakep

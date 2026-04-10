@@ -1,0 +1,71 @@
+File: orderservice
+Build ID: 556c5df50ff62ad34c39489c0203282d1f28020e
+Type: inuse_space
+Time: 2026-04-10 20:31:02 CEST
+Showing nodes accounting for 7848.20kB, 100% of 7848.20kB total
+      flat  flat%   sum%        cum   cum%
+    3591kB 45.76% 45.76%     3591kB 45.76%  runtime.allocm
+ 1184.27kB 15.09% 60.85%  1184.27kB 15.09%  runtime/pprof.StartCPUProfile
+  512.56kB  6.53% 67.38%   512.56kB  6.53%  github.com/jackc/pgx/v5/pgproto3.NewFrontend
+  512.22kB  6.53% 73.90%   512.22kB  6.53%  runtime.malg
+  512.05kB  6.52% 80.43%   512.05kB  6.52%  context.(*cancelCtx).Done
+  512.05kB  6.52% 86.95%   512.05kB  6.52%  github.com/go-playground/validator.(*Validate).parseFieldTagsRecursive
+  512.03kB  6.52% 93.48%  1024.08kB 13.05%  github.com/go-playground/validator.(*Validate).extractStructCache
+  512.01kB  6.52%   100%   512.01kB  6.52%  github.com/jackc/pgx/v5/pgtype.scanPlanString.Scan
+         0     0%   100%   512.56kB  6.53%  database/sql.(*DB).Ping
+         0     0%   100%   512.56kB  6.53%  database/sql.(*DB).PingContext
+         0     0%   100%   512.56kB  6.53%  database/sql.(*DB).PingContext.func1
+         0     0%   100%   512.56kB  6.53%  database/sql.(*DB).conn
+         0     0%   100%   512.05kB  6.52%  database/sql.(*DB).connectionOpener
+         0     0%   100%   512.56kB  6.53%  database/sql.(*DB).retry
+         0     0%   100%   512.01kB  6.52%  database/sql.(*Rows).Next
+         0     0%   100%   512.01kB  6.52%  database/sql.(*Rows).Next.func1
+         0     0%   100%   512.01kB  6.52%  database/sql.(*Rows).nextLocked
+         0     0%   100%   512.01kB  6.52%  database/sql.withLock
+         0     0%   100%  1184.27kB 15.09%  github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+         0     0%   100%  1184.27kB 15.09%  github.com/go-chi/chi/v5.(*Mux).routeHTTP
+         0     0%   100%  1024.08kB 13.05%  github.com/go-playground/validator.(*Validate).Struct (inline)
+         0     0%   100%  1024.08kB 13.05%  github.com/go-playground/validator.(*Validate).StructCtx
+         0     0%   100%  1024.08kB 13.05%  github.com/go-playground/validator.(*validate).traverseField
+         0     0%   100%  1024.08kB 13.05%  github.com/go-playground/validator.(*validate).validateStruct
+         0     0%   100%   512.56kB  6.53%  github.com/jackc/pgx/v5.ConnectConfig
+         0     0%   100%   512.56kB  6.53%  github.com/jackc/pgx/v5.connect
+         0     0%   100%   512.56kB  6.53%  github.com/jackc/pgx/v5/pgconn.ConnectConfig
+         0     0%   100%   512.56kB  6.53%  github.com/jackc/pgx/v5/pgconn.ParseConfigWithOptions.func1
+         0     0%   100%   512.56kB  6.53%  github.com/jackc/pgx/v5/pgconn.connectOne
+         0     0%   100%   512.56kB  6.53%  github.com/jackc/pgx/v5/pgconn.connectPreferred
+         0     0%   100%   512.01kB  6.52%  github.com/jackc/pgx/v5/stdlib.(*Rows).Next
+         0     0%   100%   512.01kB  6.52%  github.com/jackc/pgx/v5/stdlib.(*Rows).Next.func14
+         0     0%   100%   512.56kB  6.53%  github.com/jackc/pgx/v5/stdlib.connector.Connect
+         0     0%   100%   512.01kB  6.52%  gorm.io/gorm.(*DB).Find
+         0     0%   100%   512.01kB  6.52%  gorm.io/gorm.(*DB).FirstOrCreate
+         0     0%   100%   512.01kB  6.52%  gorm.io/gorm.(*processor).Execute
+         0     0%   100%   512.56kB  6.53%  gorm.io/gorm.Open
+         0     0%   100%   512.01kB  6.52%  gorm.io/gorm.Scan
+         0     0%   100%   512.01kB  6.52%  gorm.io/gorm/callbacks.Query
+         0     0%   100%   512.56kB  6.53%  main.main
+         0     0%   100%  1184.27kB 15.09%  net/http.(*ServeMux).ServeHTTP
+         0     0%   100%  1184.27kB 15.09%  net/http.(*conn).serve
+         0     0%   100%  1184.27kB 15.09%  net/http.HandlerFunc.ServeHTTP
+         0     0%   100%  1184.27kB 15.09%  net/http.serverHandler.ServeHTTP
+         0     0%   100%  1184.27kB 15.09%  net/http/pprof.Profile
+         0     0%   100%   512.56kB  6.53%  orderservice/internal/app.(*App).Run
+         0     0%   100%   512.56kB  6.53%  orderservice/internal/db.ConnectPostgres
+         0     0%   100%  1536.09kB 19.57%  orderservice/internal/kafka.StartConsumer
+         0     0%   100%   512.01kB  6.52%  orderservice/internal/repository.(*orderRepository).AddNewOrder
+         0     0%   100%   512.01kB  6.52%  orderservice/internal/repository.(*orderRepository).AddNewOrder.func1
+         0     0%   100%  1536.09kB 19.57%  orderservice/internal/service.(*orderService).AddNewOrder
+         0     0%   100%   512.56kB  6.53%  runtime.main
+         0     0%   100%     1539kB 19.61%  runtime.mcall
+         0     0%   100%     2052kB 26.15%  runtime.mstart
+         0     0%   100%     2052kB 26.15%  runtime.mstart0
+         0     0%   100%     2052kB 26.15%  runtime.mstart1
+         0     0%   100%     3591kB 45.76%  runtime.newm
+         0     0%   100%   512.22kB  6.53%  runtime.newproc.func1
+         0     0%   100%   512.22kB  6.53%  runtime.newproc1
+         0     0%   100%     1539kB 19.61%  runtime.park_m
+         0     0%   100%     3591kB 45.76%  runtime.resetspinning
+         0     0%   100%     3591kB 45.76%  runtime.schedule
+         0     0%   100%     3591kB 45.76%  runtime.startm
+         0     0%   100%   512.22kB  6.53%  runtime.systemstack
+         0     0%   100%     3591kB 45.76%  runtime.wakep
