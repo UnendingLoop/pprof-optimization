@@ -47,6 +47,9 @@ func (a *App) Run() {
 	if err != nil {
 		log.Fatalf("Failed to retrieve sql.DB: %v", err)
 	}
+	sqlDB.SetMaxOpenConns(20)
+	sqlDB.SetMaxIdleConns(8)
+
 	defer func() {
 		if err := sqlDB.Close(); err != nil {
 			log.Println("Failed to close DB-connection:", err)

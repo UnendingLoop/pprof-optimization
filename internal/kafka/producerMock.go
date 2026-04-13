@@ -16,8 +16,9 @@ func EmulateMsgSending(broker, topic string) {
 	mockWriter := kafka.Writer{
 		Addr:         kafka.TCP(broker),
 		Topic:        topic,
-		BatchSize:    1,
-		BatchTimeout: 5 * time.Millisecond,
+		BatchSize:    500,
+		BatchBytes:   1e6,
+		BatchTimeout: 20 * time.Millisecond,
 		Async:        false,
 	}
 

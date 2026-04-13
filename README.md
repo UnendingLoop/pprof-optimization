@@ -54,12 +54,24 @@ go tool pprof -top heap_intial.pb.gz
 
 #### CPU-profile
 
+Преамбула:
+
+```bash
+File: orderservice
+Build ID: de62ac89963afdcde1015fe768f7da2c9809b190
+Type: cpu
+Time: 2026-04-05 16:44:04 CEST
+Duration: 60.10s, Total samples = 36.02s (59.94%)
+Showing nodes accounting for 26.79s, 74.38% of 36.02s total
+Dropped 882 nodes (cum <= 0.18s)
+```
+
 ##### Топ-5 по 'flat' - "чистому" потреблению процессорного времени функцией:
 
 | Функция | flat | flat% | cum | cum% |
 |---------|------|-------|-----|------|
 | internal/runtime/syscall.Syscall6 | 7.89s | 21.90% | 7.89s | 21.90% |
-| runtime.nanotime | 2.70s |	7.50%	| 2.70s | 7.50% |
+| runtime.nanotime | 2.70s | | 7.50% | | 2.70s | 7.50% |
 | runtime.futex | 2.08s | 5.77% | 2.08s | 5.77% |
 | time.runtimeNow | 1.45s | 4.03% |1.45s| 4.03% |
 | runtime.scanobject | 1.30s | 3.61% | 2.92s | 8.11% |
@@ -77,29 +89,28 @@ go tool pprof -top heap_intial.pb.gz
 
 | Функция | flat | flat% | cum | cum% |
 |---------|------|-------|-----|------|
-| gorm.io/gorm.(*DB).FirstOrCreate | 0 | 0,00% | 9.59s | 26.62% |
-| database/sql.withLock | 0.06s | 0.17% | 8.17s | 22.68% |
-| internal/runtime/syscall.Syscall | 67.89s | 21.90% | 7.89s | 21.90% |
-| gorm.io/gorm.(*DB).Create | 0 | 0,00% | 7.41s | 20.57% |
-| internal/poll.ignoringEINTRIO | 0 | 0,00% | 7.07s | 19.63% |
-| syscall.Syscall | 0.03s | 0.083% | 7.04s | 19.54% |
-| database/sql.(*DB).queryDC | 0.05s | 0.14% | 6.71s | 18.63% |
-| syscall.RawSyscall6 | 0.04s | 0.11% | 6.51s | 18.07% |
-| runtime.mcall | 0.02s | 0.056% | 6.38s | 17.71% |
-| runtime.schedule | 0.03s | 0.083% | 6.27s | 17.41% |
+| orderservice/internal/kafka.StartConsumer | 0,02s | 0,06% | 17,16s | 47,64% |
+|  orderservice/internal/service.(*orderService).AddNewOrder | 0,03s | 0,08% | 16,98s | 47,14% |
+| gorm.io/gorm.(*processor).Execute | 0,06s | 0,17% | 12,85s | 35,67% |
+| orderservice/internal/repository.(*orderRepository).AddNewOrder.func1 | 0,02s | 0,06% | 12,74s | 35,37% | 
+| orderservice/internal/repository.(*orderRepository).AddNewOrder | 0s | 0,00% | 12,74s | 35,37% | 
+| gorm.io/gorm.(*DB).FirstOrCreate | 0s | 0,00% | 9,59s | 26,62% | 
+| database/sql.withLock | 0,06s | 0,17% | 8,17s | 22,68% | 
+| internal/runtime/syscall.Syscall6 | 7,89s | 21,90% | 7,89s | 21,90% | 
+| gorm.io/gorm.(*DB).Create | 0s | 0,00% | 7,41s | 20,57% | 
+| internal/poll.ignoringEINTRIO | 0s | 0,00% | 7,07s | 19,63% |
 
 **Выводы:**
-- Основная нагрузка распределяется между ORM-операциями:
+Основная нагрузка распределяется между ORM-операциями:
    - gorm DB.Create, FirstOrCreate
-   - database/sql слои
-- Большая часть времени уходит на:
+   - database/sql слои.
+Большая часть времени уходит на:
    - выполнение SQL-запросов
-   - обработку соединений и блокировок (withLock, queryDC)
-- Значимая доля времени приходится на планировщик и runtime (schedule, mcall)
+   - обработку соединений и блокировок (withLock, queryDC).
 
 Система демонстрирует I/O-bound характер нагрузки:CPU время "растворяется" в ожидании БД и Kafka.
 
-##### Аггрегация по пакетам и по 'cum':
+##### Аггрегация по пакетам и рейтинг по 'cum':
 
 | Пакет | flat | flat% | cum |
 |-------|------|-------|-----|
@@ -134,6 +145,17 @@ go tool pprof -top heap_intial.pb.gz
 - reflect и encoding/json присутствуют, но не доминируют
 
 #### Allocations-profile
+
+Преамбула:
+
+```bash
+File: orderservice
+Build ID: de62ac89963afdcde1015fe768f7da2c9809b190
+Type: alloc_space
+Time: 2026-04-06 15:06:39 CEST
+Showing nodes accounting for 2608.74MB, 90.66% of 2877.36MB total
+Dropped 295 nodes (cum <= 14.39MB)
+```
 
 ##### Топ-15 по 'flat':
 
@@ -223,6 +245,16 @@ go tool pprof -top heap_intial.pb.gz
 
 #### Heap-profile
 
+Преамбула:
+
+```bash
+File: orderservice
+Build ID: de62ac89963afdcde1015fe768f7da2c9809b190
+Type: inuse_space
+Time: 2026-04-06 15:06:24 CEST
+Showing nodes accounting for 9256.30kB, 100% of 9256.30kB total
+```
+
 Снятие профиля с кучи показывает, что после нагрузочного тестирования и отработки GC приложение занимает ~9MB памяти:
 
 | Функция | flat | flat% | сum |
@@ -253,41 +285,318 @@ go tool pprof -top heap_intial.pb.gz
 | работа reflect и json в горячих местах | минимизировать использование reflect в runtime-пути; по возможности заменить на явные структуры/маппинг; уменьшить количество marshal/unmarshal |  |
 | активная работа runtime + GC (runtime.* занимает большую долю CPU и памяти) | уменьшить количество аллокаций: переиспользование структур, уменьшение количества временных объектов, батчинг; проверить частоту создания объектов в горячих путях |
 | нагрузка на синхронизацию горутин (futex, schedule, locks) | уменьшить конкуренцию: меньше горутин на узких участках, убрать лишние блокировки, пересмотреть архитектуру потоков обработки |
-| тяжелые I/O-операции: сеть, БД, Кафка | kafka-writer без bulk-накопления - добавить batching; проверить лимиты соединений к БД (pool, max open/idle conns); уменьшить количество одновременных запросов | Батчинг должен уменьшить кол-во обращений к кафке, но при этом увеличится сам размер обращения, + это не повлияет на кол-во сообщений в очереди кафки на чтение приложением; для БД как вариант можно еще рассмотреть внедрение воркеров, которые будут обращаться к базе при получении задачи в канал, в который будут писать экземпляры хендлеров - но сомнительно, что это снизит нагрузку по синхронизации потоков в рантайме |
+| тяжелые I/O-операции: сеть, БД, Кафка | kafka-writer без bulk-накопления - добавить batching; проверить лимиты соединений к БД (pool, max open/idle conns); уменьшить количество одновременных запросов | Батчинг должен уменьшить кол-во обращений к кафке, но при этом увеличится сам размер сообщения, + это не повлияет на кол-во сообщений в очереди кафки на чтение приложением; для БД как вариант можно еще рассмотреть внедрение воркеров, которые будут обращаться к базе при получении задачи в канал, в который будут писать экземпляры хендлеров - но сомнительно, что это снизит нагрузку по синхронизации потоков в рантайме |
 | перегруз в выполнении операций в рамках ORM-обращений к БД | использовать более дешевые ORM-операции; делать INSERT батчами; по возможности перейти на более прямые запросы; отключить лишние callback-и и логирование | это должно уменьшить среднее время выполнения запроса внутри БД. NB отключение/включение логирования orm-запросов уже реализовано через .env - достаточно указать 'GLOBAL_MODE="production"' для отключения |
 | частые аллокации в validator (инициализация, парсинг тегов) | создавать validator один раз и переиспользовать; не создавать новый экземпляр на каждый запрос |
 | регулярные выражения (regexp) в валидации/обработке | избегать частого создания regexp; компилировать и переиспользовать; убрать regex из горячих участков если возможно |
 
 
-### Оптимизация 0 - смена генерации моков на чтение предподготовленных данных из файла
+### Оптимизация 1 - смена генерации моков на чтение предподготовленных данных из файла
+
+Ссылка на коммит с оптимизацией: https://github.com/UnendingLoop/pprof-optimization/commit/1761f077e196d29ed0f371c9b7fcfd8780fda3fc 
 
 Изначально в проекте было 2 этапа тестов:
 1. 10 предподготовленных заказа (5 валидных, 2 дубля и 3 невалидных) из файла;
-2. 10 валидных заказов, генерируемых посредством использования "faker" в пакете mocks.
+2. 10 заказов, генерируемых посредством использования "faker" в пакете mocks.
 
 Для снятия профилей была добавлена нагрузка: во втором этапе вместо 10 заказов генерировалось 15К, что привело к повышенному потреблению памяти/аллокаций/процессорного времени и захламлению профилей шумом.
 
 В рамках "Оптимизации 0" было сгенерировано 15К фейковых валидных заказов в файл(включая 84 дубля), который при запуске приложения читается в память в виде слайса, и далее этот слайс читается 5 горутинами параллельно из разных позиций для избежания отправки повторов в Кафку.
 
+- GC runs: 408
+- GC pause: 62218231
+
+
+### Повторное снятие "эталонных" показателей и сравнение с предыдущими значениями
+
+#### CPU-profile
+
+Преамбула:
+
+```bash
+File: orderservice
+Build ID: 556c5df50ff62ad34c39489c0203282d1f28020e
+Type: cpu
+Time: 2026-04-10 20:28:42 CEST
+Duration: 60s, Total samples = 31.57s (52.62%)
+Showing nodes accounting for 23.96s, 75.89% of 31.57s total
+Dropped 770 nodes (cum <= 0.16s)
+```
+
+##### Топ-5 по 'flat' - "чистому" потреблению процессорного времени функцией:
+
+| Функция | flat | flat% | cum | cum% |
+|---------|------|-------|-----|------|
+| internal/runtime/syscall.Syscall6 | 9.25s | 29.30% | 9.25s | 29.30% |
+| runtime.nanotime | 3.14s | 9.95% | 3.14s | 9.95% |
+| runtime.futex | 2.06s | 6.53% | 2.06s | 6.53% |
+| time.runtimeNow | 1.69s | 5.35% | 1.69s | 5.35% |
+| runtime.scanobject | 0.79s | 2.50% | 1.98s | 6.27% |
 
 
 
+**Выводы** - с первых эталонных замеров почти ничего не изменилось:
+- Значительная доля CPU уходит в системные вызовы (syscall.Syscall6, syscall, futex), что указывает на:
+   - интенсивное взаимодействие с сетью (Kafka, БД),
+   - частую синхронизацию горутин,
+- Высокая доля runtime.nanotime и time.runtimeNow - частые обращения к времени (таймеры, логика, ORM, драйверы)
+- runtime.scanobject занимает заметную долю - активная работа GC
+
+CPU так же нагружен не бизнес-логикой, а инфраструктурными операциями (I/O + runtime).
+
+##### Топ-20 по 'cum' - с учетом выполнения вложенных вызовов:
+
+| Функция | flat | flat% | cum | cum% |
+|---------|------|-------|-----|------|
+| orderservice/internal/kafka.StartConsumer | 0.01s | 0.032% | 18,67s | 59.14% |
+| orderservice/internal/service.(*orderService).AddNewOrder | 0s | 0,00% | 18,48s | 58.54% | 
+| gorm.io/gorm.(*processor).Execute | 0.12s | 0.38% | 14,54s | 46.06% | 
+| orderservice/internal/repository.(*orderRepository).AddNewOrder | 0s | 0,00% | 14,48s | 45.87% | 
+| orderservice/internal/repository.(*orderRepository).AddNewOrder.func1 | 0s | 0,00% | 14,48s | 45.87% |  
+| gorm.io/gorm.(*DB).FirstOrCreate | 0.01s | 0.032% | 11,23s | 35.57% |
+| internal/runtime/syscall.Syscall6 | 9.25s | 29.30% | 9,25s | 29.30% |
+| database/sql.withLock | 0.04s | 0.13% | 9,11s | 28.86% | 
+| gorm.io/gorm.(*DB).Create | 0s | 0,00% | 8,24s | 26.10% | 
+| internal/poll.ignoringEINTRIO | 0s | 0,00% | 7,81s | 24.74% | 
+
+**Выводы** - показатели особо не изменились:
+- основная нагрузка - ORM-операции;
+- львиная доля времени уходит на выполнение SQL-запросов и обработку соединений и блокировок.
 
 
+##### Аггрегация по пакетам и по 'cum':
+
+| Пакет | flat | flat% | cum |
+| ----- | ---- | ----- | --- |
+| runtime.* | 10,44s | 33,12% | 79,61s |
+| orderservice/internal/* | 0,02s | 0,06% | 70,67s |
+| gorm.io/gorm.* | 1,09s | 3,46% | 73,77s |
+| github.com/jackc/pgx/v5.* | 0,51s | 1,62% | 57,28s |
+| database/sql.* | 0,29s | 0,93% | 53,24s |
+| syscall.* | 0,07s | 0,22% | 30,7s |
+| internal/poll.* & internal/runtime* | 9,32s | 29,52% | 28,22s |
+| github.com/segmentio/kafka-go.* | 0,11s | 0,35% | 27,33s |
+| net.* | 0,02s | 0,06% | 15,55s |
+| time.* | 1,73s | 5,48% | 5,4s |
+| github.com/go-playground/validator.* | 0,15s | 0,47% | 3,79s |
+| encoding/json.* | 0,07s | 0,23% | 1,94s |
+| bufio | 0,04s | 0,13% | 1,63s |
+
+**Выводы:**
+Исчезли из оборота пакеты:
+- reflect.*;
+- math/rand.*;
+- faker;
+
+как и ожидалось после перехода от генерации моков к чтению готовых данных из файла. Остальные потребители примерно сохраняют уровень потребления ресурсов как и раньше.
+
+##### Diff по пакетам и рейтинг по 'cum'
+
+Преамбула:
+```bash
+File: orderservice
+Build ID: 556c5df50ff62ad34c39489c0203282d1f28020e
+Type: cpu
+Time: 2026-04-05 16:44:04 CEST
+Duration: 120.10s, Total samples = 36.02s (29.99%)
+Showing nodes accounting for -3.82s, 10.61% of 36.02s total
+Dropped 696 nodes (cum <= 0.18s)
+```
+
+| Пакет | flat | flat% | cum |
+| ----- | ---- | ----- | --- |
+| github.com/go-faker/faker/v4.* | -0,79s | 2,19% | -11,15s |
+| runtime.* | -2,09s | 12,39% | -8,8s |
+| math/rand.* | -0,82s | 2,28% | -6,36s |
+| Reflect.* | -0,4s | 1,33% | -1,01s |
+| encoding/json.* | -0,19s | 0,53% | -0,74s |
+| github.com/go-playground/validator.* | -0,01s | 0,31% | -0,56s |
+| github.com/segmentio/kafka-go.* | -0,01s | 0,53% | -0,52s |
+| Strings.* | 0s | 0,17% | -0,34s |
+| internal/runtime/sync.* | -0,2s | 0,66% | -0,18s |
+| Regexp.* | -0,04s | 0,17% | -0,1s |
+| Sync.* | 0,06s | 0,28% | -0,05s |
+| bufio | -0,03s | 0,08% | -0,02s |
+| Time.* | 0,29s | 0,81% | 0,31s |
+| internal* | -0,13s | 0,59% | 0,75s |
+| Net.* | -0,01s | 0,08% | 1,3s |
+| database/sql.* | -0,05s | 0,59% | 1,8s |
+| Syscall.* | -0,02s | 0,22% | 3,05s |
+| orderservice/internal/* | -0,05s | 0,20% | 4,86s |
+| github.com/jackc/pgx/v5.* | 0,07s | 1,65% | 4,94s |
+| internal/runtime/* | 0,96s | 5,72% | 0,39s |
+| gorm.io/gorm.* | 0,09s | 1,86% | 6,39s |
+
+**Выводы:**
+Стало лучше:
+1. сильно просел(точнее исчез) faker - снизилось потребление CPU на 11% из-за отказа от генерации данных;
+2. как следствие меньше GC и аллокаций:
+   - меньше faker - меньше аллокаций;
+   - меньше reflect - меньше временных объектов;
+   - меньше rand-операций.
+
+Это уменьшит шум при анализе и сравнении следующих итераци профилировки.
+
+Стало хуже:
+1. выросли системные вызовы - больше работы с сетью / БД / Kafka, так как система стала ближе к реальной нагрузке;
+2. выросло время работы ORM (gorm) - теперь CPU не тратится на faker - стало видно реальную стоимость DB слоя;
+3. немного выросли таймеры / время - больше реальной работы - больше системных вызовов времени.
+
+Для всех трех выводов вероятнее всего одна причина: ранее при генерации моков было много невалидных заказов, а теперь почти все 15К фейковых заказов - валидные, что приводит к более частому обращению к БД, что в свою очередь увеличивает кол-во логов от БД - отключение логов запланировано в следующей оптимизации.
+
+#### Allocations-profile
+
+Преамбула:
+
+```bash
+File: orderservice
+Build ID: 556c5df50ff62ad34c39489c0203282d1f28020e
+Type: alloc_space
+Time: 2026-04-10 20:31:27 CEST
+Showing nodes accounting for 1547.60MB, 88.12% of 1756.29MB total
+Dropped 263 nodes (cum <= 8.78MB)
+```
+##### Топ-15 по 'flat':
+
+| Функция | flat | flat% | cum | cum% |
+|---------|------|-------|-----|------|
+| gorm.io/gorm.(*Statement).clone | 228,63MB | 13,02% | 252,63MB | 14,38% |
+| gorm.io/gorm.(*Statement).AddClause | 172,1MB | 9,80% | 206,61MB | 11,76% |
+| github.com/go-playground/validator.New | 71,31MB | 4,06% | 98,81MB | 5,63% |
+| github.com/go-playground/validator.(*Validate).extractStructCache | 69MB | 3,93% | 172,51MB | 9,82% |
+| gorm.io/gorm/callbacks.ConvertToCreateValues | 66,53MB | 3,79% | 94,04MB | 5,35% |
+| github.com/go-playground/validator.(*Validate).parseFieldTagsRecursive | 55,51MB | 3,16% | 93,51MB | 5,32% |
+| gorm.io/gorm/clause.Values.Build | 52,5MB | 2,99% | 80,51MB | 4,58% |
+| gorm.io/gorm.(*DB).Session | 47,51MB | 2,70% | 156,06MB | 8,89% |
+| database/sql.driverArgsConnLocked | 45,52MB | 2,59% | 45,52MB | 2,59% |
+| gorm.io/gorm.Scan | 45,51MB | 2,59% | 129,02MB | 7,35% |
+| gorm.io/gorm.(*Statement).SelectAndOmitColumns | 43,01MB | 2,45% | 43,01MB | 2,45% |
+| github.com/jackc/pgx/v5/stdlib.(*Rows).Next | 40,5MB | 2,31% | 48,5MB | 2,76% |
+| strings.genSplit | 39MB | 2,22% | 39MB | 2,22% |
+| github.com/jackc/pgx/v5.(*Conn).getRows | 32,51MB | 1,85% | 32,51MB | 1,85% |
+| gorm.io/gorm.(*DB).getInstance | 30,01MB | 1,71% | 174,08MB | 9,91% |
+
+**Выводы:**
+
+Как и ожидалось - без генерации моков аллокации уменьшились. Однако, нагрузка по обращениям к БД немного подросла.
 
 
+##### Топ-15 по 'cum':
 
+| Функция | flat | flat% | cum | cum% |
+| ------- |------|-------|-----|------|
+| orderservice/internal/kafka.StartConsumer | 2,5MB | 0,14% | 1648,57MB | 93,87% |
+| orderservice/internal/service.(*orderService).AddNewOrder | 24,51MB | 1,40% | 1643,07MB | 93,55% |
+| orderservice/internal/repository.(*orderRepository).AddNewOrder | 0,5MB | 0,03% | 1136,36MB | 64,70% |
+| orderservice/internal/repository.(*orderRepository).AddNewOrder.func1 | 13,5MB | 0,77% | 1135,86MB | 64,67% |
+| gorm.io/gorm.(*processor).Execute | 3MB | 0,17% | 1023,41MB | 58,27% |
+| gorm.io/gorm.(*DB).FirstOrCreate | 0MB | 0,00% | 949,8MB | 54,08% |
+| gorm.io/gorm.(*DB).Create | 0MB | 0,00% | 752,77MB | 42,86% |
+| gorm.io/gorm/callbacks.RegisterDefaultCallbacks.SaveAfterAssociations.func4 | 1,5MB | 0,09% | 544,7MB | 31,01% |
+| gorm.io/gorm/callbacks.saveAssociations | 1MB | 0,06% | 529,2MB | 30,13% |
+| gorm.io/gorm/callbacks.RegisterDefaultCallbacks.Create.func3 | 14MB | 0,80% | 415,61MB | 23,66% |
+| gorm.io/gorm.(*Statement).clone | 228,63MB | 13,02% | 252,63MB | 14,38% |
+| gorm.io/gorm/callbacks.Query | 0MB | 0,00% | 250,03MB | 14,24% |
+| github.com/go-playground/validator.(*Validate).Struct | 0MB | 0,00% | 230,73MB | 13,14% |
+| github.com/go-playground/validator.(*Validate).StructCtx | 0MB | 0,00% | 230,73MB | 13,14% |
+| gorm.io/gorm.(*DB).Find | 0MB | 0,00% | 214,53MB | 12,21% |
 
-### Оптимизация 1 - Kafka/DB
+**Выводы:**
+
+На данный момент главные потребители ресурсов - Kafka-консюмер и ORM-операции (и их последующие обращения к БД).
+
+##### Аггрегация по пакетам и по 'cum':
+| Пакет | flat | flat% | cum |
+| ----- | ---- | ----- | --- |
+| gorm.io/gorm.* | 771,8MB | 43,94% | 6993,77MB |
+| orderservice/internal/kafka.* | 72,53MB | 4,14% | 5876,18MB |
+| github.com/go-playground/validator.* | 230,32MB | 13,12% | 1252,45MB |
+| database/sql.* | 75,02MB | 4,27% | 1039,19  MB |
+| github.com/segmentio/kafka-go.* | 30,02MB | 1,71% | 329,79MB |
+| github.com/jackc/pgx/v5.* | 132,01MB | 7,52% | 286,04MB |
+| internal/sync.(*HashTrieMap * | 28MB | 1,59% | 184MB |
+| strings.* | 105,02MB | 5,98% | 169,02MB |
+| sync.* | 28,56MB | 0,0163 | 149,22MB |
+| regexp.* | 29,27MB | 1,67% | 137,13MB |
+| reflect | 33,5MB | 1,91% | 72,5MB |
+| encoding/json.* | 2MB | 0,11% | 59MB |
+
+**Выводы:**
+В разрезе пакетов наблюдается некоторый спад потребления аллокаций, но kafka и gorm все так же в лидерах.
+
+##### Diff по пакетам и рейтинг по 'cum'
+
+Преамбула:
+```bash
+File: orderservice
+Build ID: 556c5df50ff62ad34c39489c0203282d1f28020e
+Type: alloc_space
+Time: 2026-04-06 15:06:39 CEST
+Showing nodes accounting for -1149516.03kB, 39.01% of 2946420.81kB total
+Dropped 359 nodes (cum <= 14732.10kB)
+```
+
+| Пакет | flat | flat% | cum |
+| ----- | ---- | ----- | --- |
+| github.com/go-faker/faker/v4.* | -166415,43kB | 5,65% | -5367066,24kB | 
+| orderservice/internal/* | 8210,83kB | 1,37% | -3017869,35kB | 
+| math/rand.(*Rand).Perm | -695013,44kB | 23,59% | -695013,44kB | 
+| github.com/segmentio/kafka-go.* | -31939,53kB | 1,09% | -318453,48kB | 
+| github.com/go-playground/validator.* | -14850,2kB | 0,50% | -166004,98kB | 
+| internal/sync.* | -35330,55kB | 1,20% | -157196,39kB | 
+| gorm.io/gorm.* | -40973,04kB | 3,76% | -137874,8kB | 
+| reflect.* | -59924,88kB | 2,03% | -122409,62kB | 
+| regexp.* | -25666,46kB | 0,87% | -101826,49kB | 
+| strings.* | -42495,89kB | 1,90% | -84991,78kB | 
+| database/sql.* | -6671,54kB | 0,51% | -84204,49kB | 
+| sync.(*Map)&(*Pool) | -11285,73kB | 0,0038 | -74307,52kB |
+| encoding/json.Marshal | -15891,38kB | 0,54% | -19479,66kB | 
+| github.com/jackc/pgx/v5/stdlib.* | -8708,78kB | 0,30% | -14376,79kB |
+
+**Выводы:**
+Преамбула diff показывает снижение потребления памяти почти на 40% - получается столько ресурса тратилось на генерацию моков.
+
+#### Heap-profile diff
+
+Преамбула: 
+```bash
+File: orderservice
+Build ID: 556c5df50ff62ad34c39489c0203282d1f28020e
+Type: inuse_space
+Time: 2026-04-06 15:06:24 CEST
+Showing nodes accounting for -1.38MB, 15.21% of 9.04MB total
+```
+
+| Функция | flat | flat% | сum | cum% |
+|---------|------|-------|-----| ---- |
+runtime.allocm | -2MB | 22,17% | -2MB | 22,17% | 
+| runtime/pprof.StartCPUProfile | 1,16MB | 12,79% | 1,16MB | 12,79% | 
+| regexp.(*bitState).reset | -0,52MB | 5,71% | -0,52MB | 5,71% | 
+| reflect.growslice | -0,51MB | 5,66% | -0,51MB | 5,66% | 
+| regexp/syntax.(*compiler).inst | -0,50MB | 5,54% | -0,50MB | 5,54% | 
+| github.com/jackc/pgx/v5/pgproto3.NewFrontend | 0,50MB | 5,54% | 0,50MB | 5,54% | 
+| orderservice/internal/service.(*orderService).AddNewOrder | -0,50MB | 5,53% | -0,02MB | 0,18% | 
+| runtime.malg | 0,50MB | 5,53% | 0,50MB | 5,53% | 
+| context.(*cancelCtx).Done | 0,50MB | 5,53% | 0,50MB | 5,53% | 
+| runtime.(*scavengerState).init | -0,50MB | 5,53% | -0,50MB | 5,53% | 
+| github.com/go-playground/validator.(*Validate).extractStructCache | 0,50MB | 5,53% | 0,50MB | 5,53% | 
+| github.com/segmentio/kafka-go/protocol.structDecodeFuncOf | -0,50MB | 5,53% | -0,50MB | 5,53% | 
+| github.com/jackc/pgx/v5/pgtype.scanPlanString.Scan | 0,50MB | 5,53% | 0,50MB | 5,53%
+
+**Выводы:**
+
+После отказа от генерации моков профиль кучи показывает, что приложение занимает ~7.8Mb, что на 15% меньше предыдущего значения, хотя такое уменьшение не ожидалось: в предыдущей версии кода после отработки генерации моков, задействованные в ней функции и временные данные должны были очиститься GC, и постоянно используемая приложением память по идее должна была бы быть примерно одинакова в обеих версиях. Предположение: сам бинарник приложения стал чуть легче из-за удаления логики/пакетов генерации моков.
+
+### Оптимизация 1 - Kafka/DB - инфраструктурные изменения
 
 План изменений:
-- сделать bulk-накопление сообщений(300) в kafka-writer перед их отправкой;
+- сделать bulk-накопление сообщений(500) в kafka-writer перед их отправкой;
+- сделать bulk-чтение(макс. 10Мб) сообщений из Kafka;
 - указать макс. кол-во соединений к БД:
    - MaxOpenConns = 16
    - MaxIdleConns = 8
+- отключить логирование GORM(параметр в env.)
 
-Ожидание: уменьшение потребления ОЗУ у runtime.allocm и ЦП у syscall.Syscall6
-
-Ссылка на коммит с оптимизацией: 
+Ожидание: уменьшение потребления ЦП у syscall.Syscall6
 
 

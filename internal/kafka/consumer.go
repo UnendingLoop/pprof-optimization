@@ -44,9 +44,9 @@ func NewKafkaReader(broker, topic string) *kafka.Reader {
 		Brokers:     []string{broker},
 		Topic:       topic,
 		GroupID:     "order-service",
-		MinBytes:    10e3,
-		MaxBytes:    10e6,
+		MinBytes:    1e3,
+		MaxBytes:    1e7, // 10MB
+		MaxWait:     500 * time.Millisecond,
 		StartOffset: kafka.FirstOffset,
-		MaxWait:     1 * time.Second,
 	})
 }
