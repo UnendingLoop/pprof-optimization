@@ -1,0 +1,89 @@
+File: orderservice
+Build ID: 56fd7ab202b9ced3754b0933603c2d482033c547
+Type: inuse_space
+Time: 2026-04-10 20:31:02 CEST
+Showing nodes accounting for 0.86MB, 11.28% of 7.66MB total
+Dropped 2 nodes (cum <= 0.04MB)
+      flat  flat%   sum%        cum   cum%
+   -1.16MB 15.09% 15.09%    -1.16MB 15.09%  runtime/pprof.StartCPUProfile
+       1MB 13.07%  2.02%        1MB 13.07%  runtime.allocm
+    0.52MB  6.78%  4.77%     0.52MB  6.78%  github.com/jackc/pgx/v5/pgtype.(*Map).RegisterDefaultPgType (inline)
+   -0.50MB  6.53%  1.77%    -0.50MB  6.53%  github.com/jackc/pgx/v5/pgproto3.NewFrontend
+   -0.50MB  6.53%  8.29%    -0.50MB  6.53%  runtime.malg
+    0.50MB  6.53%  1.77%        1MB 13.05%  github.com/segmentio/kafka-go/protocol.structDecodeFuncOf.func1.1
+    0.50MB  6.53%  4.76%     0.50MB  6.53%  github.com/segmentio/kafka-go/protocol.structEncodeFuncOf.func1.1
+   -0.50MB  6.52%  1.77%    -0.50MB  6.52%  context.(*cancelCtx).Done
+   -0.50MB  6.52%  8.29%    -0.50MB  6.52%  github.com/go-playground/validator.(*Validate).parseFieldTagsRecursive
+    0.50MB  6.52%  1.77%     0.50MB  6.52%  runtime.acquireSudog
+    0.50MB  6.52%  4.76%     0.50MB  6.52%  runtime/pprof.(*profileBuilder).emitLocation
+    0.50MB  6.52% 11.28%        1MB 13.05%  github.com/segmentio/kafka-go/protocol.structDecodeFuncOf
+         0     0% 11.28%     0.02MB  0.25%  database/sql.(*DB).Ping
+         0     0% 11.28%     0.02MB  0.25%  database/sql.(*DB).PingContext
+         0     0% 11.28%     0.02MB  0.25%  database/sql.(*DB).PingContext.func1
+         0     0% 11.28%     0.02MB  0.25%  database/sql.(*DB).conn
+         0     0% 11.28%    -0.50MB  6.52%  database/sql.(*DB).connectionOpener
+         0     0% 11.28%     0.02MB  0.25%  database/sql.(*DB).retry
+         0     0% 11.28%    -1.16MB 15.09%  github.com/go-chi/chi/v5.(*Mux).ServeHTTP
+         0     0% 11.28%    -1.16MB 15.09%  github.com/go-chi/chi/v5.(*Mux).routeHTTP
+         0     0% 11.28%    -0.50MB  6.52%  github.com/go-playground/validator.(*Validate).Struct
+         0     0% 11.28%    -0.50MB  6.52%  github.com/go-playground/validator.(*Validate).StructCtx
+         0     0% 11.28%    -0.50MB  6.52%  github.com/go-playground/validator.(*Validate).extractStructCache
+         0     0% 11.28%    -0.50MB  6.52%  github.com/go-playground/validator.(*validate).traverseField
+         0     0% 11.28%    -0.50MB  6.52%  github.com/go-playground/validator.(*validate).validateStruct
+         0     0% 11.28%     0.02MB  0.25%  github.com/jackc/pgx/v5.ConnectConfig
+         0     0% 11.28%     0.02MB  0.25%  github.com/jackc/pgx/v5.connect
+         0     0% 11.28%    -0.50MB  6.53%  github.com/jackc/pgx/v5/pgconn.ConnectConfig
+         0     0% 11.28%    -0.50MB  6.53%  github.com/jackc/pgx/v5/pgconn.ParseConfigWithOptions.func1
+         0     0% 11.28%    -0.50MB  6.53%  github.com/jackc/pgx/v5/pgconn.connectOne
+         0     0% 11.28%    -0.50MB  6.53%  github.com/jackc/pgx/v5/pgconn.connectPreferred
+         0     0% 11.28%     0.52MB  6.78%  github.com/jackc/pgx/v5/pgtype.NewMap
+         0     0% 11.28%     0.52MB  6.78%  github.com/jackc/pgx/v5/pgtype.initDefaultMap
+         0     0% 11.28%     0.52MB  6.78%  github.com/jackc/pgx/v5/pgtype.registerDefaultPgTypeVariants[go.shape.[]github.com/jackc/pgx/v5/pgtype.Range[github.com/jackc/pgx/v5/pgtype.Float8]]
+         0     0% 11.28%     0.02MB  0.25%  github.com/jackc/pgx/v5/stdlib.connector.Connect
+         0     0% 11.28%     1.50MB 19.58%  github.com/segmentio/kafka-go/protocol.Register
+         0     0% 11.28%        1MB 13.05%  github.com/segmentio/kafka-go/protocol.decodeFuncOf
+         0     0% 11.28%     0.50MB  6.53%  github.com/segmentio/kafka-go/protocol.encodeFuncOf
+         0     0% 11.28%     1.50MB 19.58%  github.com/segmentio/kafka-go/protocol.forEach
+         0     0% 11.28%     1.50MB 19.58%  github.com/segmentio/kafka-go/protocol.forEachStructField
+         0     0% 11.28%     1.50MB 19.58%  github.com/segmentio/kafka-go/protocol.forEachStructTag
+         0     0% 11.28%     1.50MB 19.58%  github.com/segmentio/kafka-go/protocol.forEachStructTag.func1
+         0     0% 11.28%     1.50MB 19.58%  github.com/segmentio/kafka-go/protocol.makeTypes
+         0     0% 11.28%        1MB 13.05%  github.com/segmentio/kafka-go/protocol.structDecodeFuncOf.func1
+         0     0% 11.28%     0.50MB  6.53%  github.com/segmentio/kafka-go/protocol.structEncodeFuncOf
+         0     0% 11.28%     0.50MB  6.53%  github.com/segmentio/kafka-go/protocol.structEncodeFuncOf.func1
+         0     0% 11.28%     1.50MB 19.58%  github.com/segmentio/kafka-go/protocol.typesOf
+         0     0% 11.28%     0.50MB  6.52%  github.com/segmentio/kafka-go/protocol/describeacls.init.0
+         0     0% 11.28%        1MB 13.05%  github.com/segmentio/kafka-go/protocol/joingroup.init.0
+         0     0% 11.28%     0.02MB  0.25%  gorm.io/gorm.Open
+         0     0% 11.28%     0.02MB  0.25%  main.main
+         0     0% 11.28%    -1.16MB 15.09%  net/http.(*ServeMux).ServeHTTP
+         0     0% 11.28%    -1.16MB 15.09%  net/http.(*conn).serve
+         0     0% 11.28%    -1.16MB 15.09%  net/http.HandlerFunc.ServeHTTP
+         0     0% 11.28%    -1.16MB 15.09%  net/http.serverHandler.ServeHTTP
+         0     0% 11.28%    -1.16MB 15.09%  net/http/pprof.Profile
+         0     0% 11.28%     0.02MB  0.25%  orderservice/internal/app.(*App).Run
+         0     0% 11.28%     0.02MB  0.25%  orderservice/internal/db.ConnectPostgres
+         0     0% 11.28%     0.50MB  6.52%  runtime.chanrecv
+         0     0% 11.28%     0.50MB  6.52%  runtime.chanrecv1
+         0     0% 11.28%     1.50MB 19.58%  runtime.doInit (inline)
+         0     0% 11.28%     1.50MB 19.58%  runtime.doInit1
+         0     0% 11.28%     1.52MB 19.83%  runtime.main
+         0     0% 11.28%    -0.50MB  6.54%  runtime.mcall
+         0     0% 11.28%     1.50MB 19.61%  runtime.mstart
+         0     0% 11.28%     1.50MB 19.61%  runtime.mstart0
+         0     0% 11.28%     1.50MB 19.61%  runtime.mstart1
+         0     0% 11.28%        1MB 13.07%  runtime.newm
+         0     0% 11.28%    -0.50MB  6.53%  runtime.newproc.func1
+         0     0% 11.28%    -0.50MB  6.53%  runtime.newproc1
+         0     0% 11.28%    -0.50MB  6.54%  runtime.park_m
+         0     0% 11.28%        1MB 13.07%  runtime.resetspinning
+         0     0% 11.28%        1MB 13.07%  runtime.schedule
+         0     0% 11.28%        1MB 13.07%  runtime.startm
+         0     0% 11.28%    -0.50MB  6.53%  runtime.systemstack
+         0     0% 11.28%     0.50MB  6.52%  runtime.unique_runtime_registerUniqueMapCleanup.func2
+         0     0% 11.28%        1MB 13.07%  runtime.wakep
+         0     0% 11.28%     0.50MB  6.52%  runtime/pprof.(*profileBuilder).appendLocsForStack
+         0     0% 11.28%     0.50MB  6.52%  runtime/pprof.(*profileBuilder).build
+         0     0% 11.28%     0.50MB  6.52%  runtime/pprof.profileWriter
+         0     0% 11.28%     0.52MB  6.78%  sync.(*Once).Do (inline)
+         0     0% 11.28%     0.52MB  6.78%  sync.(*Once).doSlow

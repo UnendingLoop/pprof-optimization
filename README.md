@@ -303,10 +303,6 @@ Showing nodes accounting for 9256.30kB, 100% of 9256.30kB total
 
 В рамках "Оптимизации 0" было сгенерировано 15К фейковых валидных заказов в файл(включая 84 дубля), который при запуске приложения читается в память в виде слайса, и далее этот слайс читается 5 горутинами параллельно из разных позиций для избежания отправки повторов в Кафку.
 
-- GC runs: 408
-- GC pause: 62218231
-
-
 ### Повторное снятие "эталонных" показателей и сравнение с предыдущими значениями
 
 #### CPU-profile
@@ -568,8 +564,8 @@ Showing nodes accounting for -1.38MB, 15.21% of 9.04MB total
 ```
 
 | Функция | flat | flat% | сum | cum% |
-|---------|------|-------|-----| ---- |
-runtime.allocm | -2MB | 22,17% | -2MB | 22,17% | 
+| ------- | ---- | ----- | --- | ---- |
+| runtime.allocm | -2MB | 22,17% | -2MB | 22,17% | 
 | runtime/pprof.StartCPUProfile | 1,16MB | 12,79% | 1,16MB | 12,79% | 
 | regexp.(*bitState).reset | -0,52MB | 5,71% | -0,52MB | 5,71% | 
 | reflect.growslice | -0,51MB | 5,66% | -0,51MB | 5,66% | 
@@ -587,16 +583,183 @@ runtime.allocm | -2MB | 22,17% | -2MB | 22,17% |
 
 После отказа от генерации моков профиль кучи показывает, что приложение занимает ~7.8Mb, что на 15% меньше предыдущего значения, хотя такое уменьшение не ожидалось: в предыдущей версии кода после отработки генерации моков, задействованные в ней функции и временные данные должны были очиститься GC, и постоянно используемая приложением память по идее должна была бы быть примерно одинакова в обеих версиях. Предположение: сам бинарник приложения стал чуть легче из-за удаления логики/пакетов генерации моков.
 
+Сравнение общего кол-во циклов запуска GC так же дает смещение в положительную сторону(в следующих итерациях оптимизаций таблица будет дополняться и будет вынесена в отдельный параграф): 
+
+| Версия | GC runs | GC pause, ns |
+| ------ | ------- | ------------ |
+| Initial result | 989 | 166801750 |
+| **Opt. 1 result** | 408 | 62218231 |
+ 
+
 ### Оптимизация 1 - Kafka/DB - инфраструктурные изменения
 
 План изменений:
-- сделать bulk-накопление сообщений(500) в kafka-writer перед их отправкой;
+- сделать bulk-накопление сообщений(500шт) в kafka-writer перед их отправкой;
 - сделать bulk-чтение(макс. 10Мб) сообщений из Kafka;
 - указать макс. кол-во соединений к БД:
    - MaxOpenConns = 16
    - MaxIdleConns = 8
 - отключить логирование GORM(параметр в env.)
 
-Ожидание: уменьшение потребления ЦП у syscall.Syscall6
+Ожидания: 
+- уменьшение потребления ЦП (runtime.nanotime, syscall, GC);
+- увеличение аллокаций и heap за счет bulk-операций в kafka.
+
+#### Результаты по GC
+
+| Версия | GC runs | GC pause, ns |
+| ------ | ------- | ------------ |
+| Initial result | 989 | 166801750 |
+| Opt. 1 result | 408 | 62218231 |
+| **Opt. 2 result** | 146 | 28078875 |
+
+В сравнении с предыдущей оптимизацией, частота запуска GC снизилась почти в 3 раза, как и суммарная длительность паузы.
+
+#### Diff CPU
+
+Преамбула:
+```bash
+File: orderservice
+Build ID: 56fd7ab202b9ced3754b0933603c2d482033c547
+Type: cpu
+Time: 2026-04-10 20:28:42 CEST
+Duration: 120s, Total samples = 31.57s (26.31%)
+Showing nodes accounting for -1.10s, 3.48% of 31.57s total
+Dropped 36 nodes (cum <= 0.16s)
+```
+
+Аггрегация по пакетам и рейтинг по 'cum':
+| Пакет | flat, s | flat% | сum, s |
+| ----- | ------- | ----- | ------ |
+| Runtime.* | -1,62 | 16,79% | -10,63 | 
+| gorm.io* | 0,03 | 3,87% | -3,11 | 
+| segmentio/kafka-go* | 0,04 | 1,15% | -1,24  | 
+| Time.* | -0,25 | 0,85% | -1,03 |
+| internal/sync.* | -0,03 | 0,35% | -0,47 | 
+| Regexp.* | -0,04 | 0,45% | -0,43 | 
+| orderservice/internal/* | 0,03 | 0,22% | -0,34 | 
+| bufio.(*Reader).Discard | -0,05 | 0,16% | -0,28 | 
+| Log.* | -0,03 | 0,10% | -0,22 | 
+| Context.* | -0,04 | 0,32% | -0,18 | 
+| Fmt.* | -0,04 | 0,32% | -0,08 | 
+| Strconv.* | 0 | 0,13% | -0,01 | 
+| Sync.* | 0,05 | 0,79% | 0 | 
+| container/list.* | 0,03 | 0,16% | 0,03 | 
+| Strings.* | -0,01 | 0,29% | 0,06 | 
+| Reflect.* | 0,11 | 1,30% | 0,37 | 
+| internal/runtime/* | 0,17 | 2,64% | 0,38 | 
+| encoding/json.* | 0,21 | 0,98% | 0,56 | 
+| Net.* | 0,04 | 0,26% | 0,71 | 
+| internal/*etc | 0,12 | 0,83% | 0,89 | 
+| Syscall.* | 0,01 | 0,16% | 1 | 
+| github.com/go-playground/validator.* | 0,04 | 0,51% | 1,14 | 
+| github.com/jackc/pgx/v5.* | 0,05 | 2,70% | 2,39 | 
+| database/sql.* | 0,02 | 1,15% | 3,33 | 
+
+Top-20 худших и лучших результатов по 'flat':
+| Функция | flat,s | flat% | сum, s | cum% |
+| ------- | ------ | ----- | ------ | ---- |
+| runtime.nanotime | -0,46 | 1,46% | -0,46 | 1,46% | 
+| runtime.scanobject | -0,39 | 1,24% | -1,01 | 3,20% | 
+| runtime.step | -0,14 | 0,44% | -0,14 | 0,44% | 
+| time.runtimeNow | -0,14 | 0,44% | -0,14 | 0,44% | 
+| runtime.(*gcBits).bitp | -0,13 | 0,41% | -0,13 | 0,41% | 
+| runtime.findObject | -0,12 | 0,38% | -0,19 | 0,60% | 
+| gorm.io/gorm.(*processor).Execute | -0,1 | 0,32% | -0,57 | 1,81% | 
+| internal/runtime/maps.ctrlGroup.matchH2 | -0,09 | 0,29% | -0,09 | 0,29% | 
+| runtime.(*mspan).heapBitsSmallForAddr | -0,09 | 0,29% | -0,09 | 0,29% | 
+| encoding/json.(*decodeState).object | 0,06 | 0,19% | 0,07 | 0,22% | 
+| encoding/json.checkValid | 0,06 | 0,19% | 0,11 | 0,35% | 
+| github.com/jackc/pgx/v5/pgproto3.(*Frontend).Receive | 0,06 | 0,19% | 0,11 | 0,35% | 
+| runtime.gopark | 0,07 | 0,22% | 0,07 | 0,22% | 
+| runtime.selectgo | 0,08 | 0,25% | 0,05 | 0,16% | 
+| runtime.memclrNoHeapPointers | 0,08 | 0,25% | 0,08 | 0,25% | 
+| runtime.usleep | 0,08 | 0,25% | 0,08 | 0,25% | 
+| runtime.stealWork | 0,08 | 0,25% | 0,25 | 0,79% | 
+| gorm.io/gorm.(*Statement).clone | 0,09 | 0,29% | 0,12 | 0,38% | 
+| internal/runtime/syscall.Syscall6 | 0,32 | 1,01% | 0,32 | 1,01% |
+
+#### Diff Allocs
+
+Преамбула:
+```bash
+File: orderservice
+Build ID: 56fd7ab202b9ced3754b0933603c2d482033c547
+Type: alloc_space
+Time: 2026-04-10 20:31:27 CEST
+Showing nodes accounting for 619058.82kB, 34.42% of 1798443.97kB total
+Dropped 316 nodes (cum <= 8992.22kB)
+```
+
+Аггрегация по пакетам и рейтинг по 'cum':
+| Пакет | flat, s | flat% | сum, s |
+| ----- | ------- | ----- | ------ |
+| Regexp.* | -24031,48 | 1,33% | -105311,95 | 
+| database/sql.* | 512,01 | 0,03% | -64503,05 | 
+| gorm.io/gorm.* | 25609,57 | 4,72% | -35973,1 | 
+| github.com/jackc/pgx/v5.* | -10752,74 | 0,60% | -27137,86 | 
+| Strings.* | -12803,65 | 0,72% | -17412,3 | 
+| Reflect.* | -4608,78 | 0,26% | -13826,34 | 
+| Bytes.* | 3812,67 | 0,21% | 11438,01 | 
+| internal/sync.* | 0 | 0,00% | 12289,01 | 
+| github.com/go | 15361,61 | 0,86% | 15929,8 | 
+| sync.(*Map)&(*Pool) | 5644,39 | 0,31% | 30987,17 |
+| orderservice/internal/* | -12612,57 | 0,75% | 551893,69 | 
+| github.com/segmentio/kafka-go | 638048,91 | 36,04% | 2649914,32 | 
+
+
+Top-20 худших и лучших результатов по 'flat':
+| Функция | flat,kB | flat% | сum, kB | cum% |
+| ------- | ------ | ----- | ------ | ---- |
+| regexp.(*bitState).reset | -17886,84 | 0,99% | -17886,84 | 0,99% | 
+| strings.(*Builder).WriteString | -8195 | 0,46% | -8195 | 0,46% | 
+| gorm.io/gorm/utils.FileWithLineNum | -8193,38 | 0,46% | -8193,38 | 0,46% | 
+| gorm.io/gorm/clause.Values.Build | -7168,44 | 0,40% | -9729,72 | 0,54% | 
+| github.com/jackc/pgx/v5/stdlib.(*Rows).Next | -6144,13 | 0,34% | -8704,15 | 0,48% | 
+| orderservice/internal/service.(*orderService).AddNewOrder | -5635,03 | 0,31% | -9207,17 | 0,51% | 
+| context.(*cancelCtx).Done | -5120,55 | 0,28% | -5120,55 | 0,28% | 
+| gorm.io/gorm.(*Statement).AddClause | -4612,72 | 0,26% | -11781,16 | 0,66% | 
+| reflect.growslice | -4608,78 | 0,26% | -4608,78 | 0,26% | 
+| strings.(*Builder).grow | -4608,65 | 0,26% | -4608,65 | 0,26% | 
+| github.com/segmentio/kafka | 5120,43 | 0,28% | 7168,43 | 0,40% | 
+| sync.(*Pool).pinSlow | 5644,39 | 0,31% | 5644,39 | 0,31% | 
+| gorm.io/gorm/callbacks.saveAssociations | 6144,75 | 0,34% | 48656,57 | 2,71% | 
+| gorm.io/gorm.(*Statement).clone | 6145,5 | 0,34% | 9729,83 | 0,54% | 
+| gorm.io/gorm.(*Statement).BuildCondition | 6656,34 | 0,37% | 5632,3 | 0,31% | 
+| github.com/go | 8192,75 | 0,46% | 7168,76 | 0,40% | 
+| gorm.io/gorm/callbacks.ConvertToCreateValues | 8711,29 | 0,48% | 4102,82 | 0,23% | 
+| github.com/segmentio/kafka | 10348,66 | 0,58% | 10348,66 | 0,58% | 
+| gorm.io/gorm.(*DB).getInstance | 14339,87 | 0,80% | 27142,8 | 1,51% | 
+| github.com/segmentio/kafka | 624629,34 | 34,73% | 624629,34 | 34,73% |
+
+#### Diff Heap
+
+```bash
+File: orderservice
+Build ID: 56fd7ab202b9ced3754b0933603c2d482033c547
+Type: inuse_space
+Time: 2026-04-10 20:31:02 CEST
+Showing nodes accounting for 0.86MB, 11.28% of 7.66MB total
+Dropped 2 nodes (cum <= 0.04MB)
+```
+
+#### Выводы
+
+Итого имеем:
+- CPU: нагрузка упала на 3,5%;
+- GC: частота запуска стала почти в 3 раза меньше;
+- heap: немного подрос - на +11%;
+- allocs: сильно выросли - на +34%.
+
+
+
+
+
+
+
+
+
+
+
 
 
