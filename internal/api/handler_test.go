@@ -27,6 +27,10 @@ func (m *MockOrderService) GetOrderInfo(ctx context.Context, uid string) (*model
 func (m *MockOrderService) AddNewOrder(msg *kafka.Message) {
 	// просто пустышка
 }
+func (m *MockOrderService) AddNewOrdersBulk(msg []kafka.Message) error {
+	// просто пустышка
+	return nil
+}
 
 func TestGetOrderInfo(t *testing.T) {
 	web.LoadTemplates()

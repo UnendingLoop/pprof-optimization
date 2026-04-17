@@ -18,14 +18,22 @@ import (
 
 // простой фейк под интерфейс репозитория
 type fakeRepo struct {
-	AddNewOrderFunc  func(ctx context.Context, o *model.Order) error
-	GetOrderInfoFunc func(ctx context.Context, uid string) (*model.Order, error)
-	GetAllOrdersFunc func(ctx context.Context) ([]model.Order, error)
+	AddNewOrderFunc      func(ctx context.Context, o *model.Order) error
+	AddNewOrdersBulkFunc func(ctx context.Context, os []model.Order) error
+	GetOrderInfoFunc     func(ctx context.Context, uid string) (*model.Order, error)
+	GetAllOrdersFunc     func(ctx context.Context) ([]model.Order, error)
 }
 
 func (f *fakeRepo) AddNewOrder(ctx context.Context, o *model.Order) error {
 	if f.AddNewOrderFunc != nil {
 		return f.AddNewOrderFunc(ctx, o)
+	}
+	return nil
+}
+
+func (f *fakeRepo) AddNewOrdersBulk(ctx context.Context, os []model.Order) error {
+	if f.AddNewOrdersBulkFunc != nil {
+		return f.AddNewOrdersBulkFunc(ctx, os)
 	}
 	return nil
 }

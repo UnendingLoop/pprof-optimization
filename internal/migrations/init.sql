@@ -64,3 +64,11 @@ CREATE TABLE items (
     status INT NOT NULL CHECK (status >= 0),
     CONSTRAINT fk_items_order FOREIGN KEY (order_uid) REFERENCES orders (order_uid) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+ALTER TABLE deliveries
+ADD CONSTRAINT unique_delivery_order UNIQUE (order_uid);
+
+ALTER TABLE payments
+ADD CONSTRAINT unique_payment_order UNIQUE (order_uid);
+
+UNIQUE (order_uid, rid)

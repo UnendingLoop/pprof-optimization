@@ -3,6 +3,7 @@ package repository
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 	"strings"
@@ -14,11 +15,13 @@ import (
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 // OrderRepository -
 type OrderRepository interface {
 	AddNewOrder(ctx context.Context, neworder *model.Order) error
+	AddNewOrdersBulk(ctx context.Context, newOrders []model.Order) error
 	GetOrderByUID(ctx context.Context, uid string) (*model.Order, error)
 	GetAllOrders(ctx context.Context, count int) ([]model.Order, error)
 }
@@ -62,42 +65,42 @@ func (OR *orderRepository) GetOrderByUID(ctx context.Context, uid string) (*mode
 }
 
 // AddNewOrder creates a new record in DB using ctx and transaction
-func (OR *orderRepository) AddNewOrder(ctx context.Context, neworder *model.Order) error {
+func (OR *orderRepository) AddNewOrder(ctx context.Context, newOrder *model.Order) error {
 	var tx *gorm.DB
-	neworder.Delivery.DID = nil
-	neworder.Payment.PID = nil
-	for i := range neworder.Items {
-		neworder.Items[i].IID = nil
+	newOrder.Delivery.DID = nil
+	newOrder.Payment.PID = nil
+	for i := range newOrder.Items {
+		newOrder.Items[i].IID = nil
 	}
 
 	auxFunc := func() error {
 		tx = OR.DB.WithContext(ctx).Begin()
 
 		// Создаём заказ, если его ещё нет
-		if err := tx.FirstOrCreate(&neworder, model.Order{OrderUID: neworder.OrderUID}).Error; err != nil {
+		if err := tx.FirstOrCreate(&newOrder, model.Order{OrderUID: newOrder.OrderUID}).Error; err != nil {
 			tx.Rollback()
 			return err
 		}
 
 		// Delivery
-		neworder.Delivery.OrderUID = neworder.OrderUID
-		if err := tx.FirstOrCreate(&neworder.Delivery, model.Delivery{OrderUID: neworder.OrderUID}).Error; err != nil {
+		newOrder.Delivery.OrderUID = newOrder.OrderUID
+		if err := tx.FirstOrCreate(&newOrder.Delivery, model.Delivery{OrderUID: newOrder.OrderUID}).Error; err != nil {
 			tx.Rollback()
 			return err
 		}
 
 		// Payment
-		neworder.Payment.OrderUID = neworder.OrderUID
-		if err := tx.FirstOrCreate(&neworder.Payment, model.Payment{OrderUID: neworder.OrderUID}).Error; err != nil {
+		newOrder.Payment.OrderUID = newOrder.OrderUID
+		if err := tx.FirstOrCreate(&newOrder.Payment, model.Payment{OrderUID: newOrder.OrderUID}).Error; err != nil {
 			tx.Rollback()
 			return err
 		}
 
 		// Items — вставляем все новые элементы
-		for i := range neworder.Items {
-			neworder.Items[i].OrderUID = neworder.OrderUID
+		for i := range newOrder.Items {
+			newOrder.Items[i].OrderUID = newOrder.OrderUID
 		}
-		if err := tx.Create(&neworder.Items).Error; err != nil {
+		if err := tx.Create(&newOrder.Items).Error; err != nil {
 			tx.Rollback()
 			return err
 		}
@@ -199,4 +202,95 @@ func isConnectionError(err error) bool {
 	return strings.Contains(err.Error(), "bad connection") ||
 		strings.Contains(err.Error(), "connection refused") ||
 		strings.Contains(err.Error(), "connection reset")
+}
+
+func (OR *orderRepository) AddNewOrdersBulk(ctx context.Context, newOrders []model.Order) error {
+	if len(newOrders) == 0 {
+		return errors.New("empty collection of orders to create")
+	}
+
+	//cначала разделить входящий слайс на подслайсы по таблицам
+	var tx *gorm.DB
+	dels, pays, items := convertOrdersToSubEntities(newOrders)
+
+	auxFunc := func() error {
+		tx = OR.DB.WithContext(ctx).Begin()
+
+		// Создаём отсутствующие заказы
+		if err := tx.Clauses(clause.OnConflict{DoNothing: true}).Create(&newOrders).Error; err != nil {
+			tx.Rollback()
+			return err
+		}
+
+		// Delivery
+		if err := tx.Clauses(clause.OnConflict{DoNothing: true}).Create(&dels).Error; err != nil {
+			tx.Rollback()
+			return err
+		}
+
+		// Payment
+		if err := tx.Clauses(clause.OnConflict{DoNothing: true}).Create(&pays).Error; err != nil {
+			tx.Rollback()
+			return err
+		}
+
+		// Items
+		if err := tx.Clauses(clause.OnConflict{DoNothing: true}).Create(&items).Error; err != nil {
+			tx.Rollback()
+			return err
+		}
+
+		if err := tx.Commit().Error; err != nil {
+			tx.Rollback()
+			return err
+		}
+		return nil
+	}
+
+	for range 3 {
+		err := auxFunc()
+		if err == nil {
+			return nil
+		}
+
+		if isConnectionError(err) {
+			switch OR.reconnecting.Load() {
+			case true:
+				time.Sleep(15 * time.Second)
+				continue
+			case false:
+				if conErr := OR.connectWithRetry(); conErr != nil {
+					return conErr
+				}
+				continue
+			}
+		}
+		return err
+	}
+	return nil
+}
+
+func convertOrdersToSubEntities(input []model.Order) ([]model.Delivery, []model.Payment, []model.Item) {
+	dels := make([]model.Delivery, 0, len(input))
+	pays := make([]model.Payment, 0, len(input))
+	items := make([]model.Item, 0, len(input))
+
+	for _, o := range input {
+		o.Delivery.DID = nil
+		o.Delivery.OrderUID = o.OrderUID
+
+		o.Payment.PID = nil
+		o.Payment.OrderUID = o.OrderUID
+
+		for i := range o.Items {
+			o.Items[i].IID = nil
+			o.Items[i].OrderUID = o.OrderUID
+		}
+
+		dels = append(dels, o.Delivery)
+		pays = append(pays, o.Payment)
+		items = append(items, o.Items...)
+	}
+
+	return dels, pays, items
 }

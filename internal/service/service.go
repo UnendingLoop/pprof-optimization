@@ -19,6 +19,7 @@ import (
 
 type OrderService interface {
 	AddNewOrder(msg *kafka.Message)
+	AddNewOrdersBulk(msg []kafka.Message) error
 	GetOrderInfo(ctx context.Context, uid string) (*model.Order, error)
 }
 
@@ -33,6 +34,7 @@ var (
 	ErrRecordNotFound = errors.New("запрошенный номер заказа не найден в базе")
 	ErrJSONDecode     = errors.New("ошибка декодирования JSON-сообщения: ")
 	ErrIncompleteJSON = errors.New("JSON содержит неполные данные")
+	validateOrder     = validator.New() // Обработка ошибок валидации данных
 )
 
 // NewOrderService - returns *orderService
@@ -54,9 +56,6 @@ func (OS *orderService) AddNewOrder(msg *kafka.Message) {
 		return
 	}
 
-	// Обработка ошибок валидации данных
-	validateOrder := validator.New()
-
 	err := validateOrder.Struct(order)
 	if err != nil {
 		for _, e := range err.(validator.ValidationErrors) {
@@ -73,11 +72,6 @@ func (OS *orderService) AddNewOrder(msg *kafka.Message) {
 		log.Printf("Заказ с номером '%s' уже существует!", order.OrderUID)
 		return
 	}
-	// Проверка на существование в БД
-	if _, err := OS.GetOrderInfo(context.Background(), order.OrderUID); err == nil {
-		log.Printf("Заказ с номером '%s' уже существует!", order.OrderUID)
-		return
-	}
 
 	// Записываем заказ в базу
 	if err := OS.Repo.AddNewOrder(context.Background(), &order); err != nil {
@@ -90,19 +84,62 @@ func (OS *orderService) AddNewOrder(msg *kafka.Message) {
 	log.Printf("Order '%s' created and cached", order.OrderUID)
 }
 
+// AddNewOrdersBulk receives rawJson from Kafka consumer and creates new orders in DB if rawJSON is valid, otherwise adds broken JSON into table InvalidRequests
+func (OS *orderService) AddNewOrdersBulk(msgBulk []kafka.Message) error {
+	var ordersBulk []model.Order
+	for _, raw := range msgBulk {
+		// Обработка ошибки декодирования
+		var order model.Order
+		if err := json.Unmarshal(raw.Value, &order); err != nil {
+			log.Printf(ErrJSONDecode.Error(), err)
+			OS.pushToDLQ(raw.Value)
+			continue
+		}
+		//валидация заказа
+		if err := validateOrder.Struct(order); err != nil {
+			for _, e := range err.(validator.ValidationErrors) {
+				log.Printf("Order UID '%v': Поле '%s' не прошло проверку: %s\n", order.OrderUID, e.Field(), e.Tag())
+			}
+			OS.pushToDLQ(raw.Value)
+			continue
+		}
+		// Проверка на существование в кеше
+		if _, exists := OS.Map.CacheMap.Get(order.OrderUID); exists {
+			log.Printf("Заказ с номером '%s' уже существует!", order.OrderUID)
+			continue
+		}
+
+		ordersBulk = append(ordersBulk, order)
+	}
+
+	// Записываем заказы в БД
+	if err := OS.Repo.AddNewOrdersBulk(context.Background(), ordersBulk); err != nil {
+		log.Printf("Failed to save orders to DB: %v", err)
+		return err
+	}
+
+	// Обновление кеша
+	for _, o := range ordersBulk {
+		OS.Map.CacheMap.Add(o.OrderUID, o)
+		log.Printf("Order '%s' created and cached", o.OrderUID)
+	}
+
+	return nil
+}
+
 // GetOrderInfo used only for API-calls, returns model.Order by its uuid from DB if there is any, or nil and error
-func (OS *orderService) GetOrderInfo(ctx context.Context, uid string) (*model.Order, error) {
+func (OS *orderService) GetOrderInfo(ctx context.Context, oid string) (*model.Order, error) {
 	// Проверяем сначала кэш
-	if cached, ok := OS.Map.CacheMap.Get(uid); ok {
+	if cached, ok := OS.Map.CacheMap.Get(oid); ok {
 		order := cached.(model.Order)
 		return &order, nil
 	}
 
 	// В кеше нет, идем в бд:
-	orderFromDB, err := OS.Repo.GetOrderByUID(ctx, uid)
+	orderFromDB, err := OS.Repo.GetOrderByUID(ctx, oid)
 	if err == nil {
 		// Обновление кеша
-		OS.Map.CacheMap.Add(uid, orderFromDB)
+		OS.Map.CacheMap.Add(oid, orderFromDB)
 		return orderFromDB, nil
 	}
 
