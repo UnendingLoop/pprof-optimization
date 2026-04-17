@@ -604,7 +604,7 @@ Showing nodes accounting for -1.38MB, 15.21% of 9.04MB total
 - уменьшение потребления ЦП (runtime.nanotime, syscall, GC);
 - увеличение аллокаций и heap за счет bulk-операций в kafka.
 
-Ссылка на коммит с оптимизацией:
+Ссылка на коммит с оптимизацией: https://github.com/UnendingLoop/pprof-optimization/commit/93b1cfc889fec8554fad0ea27acdec482fa1585a
 
 #### Результаты по GC
 
@@ -768,7 +768,7 @@ Dropped 2 nodes (cum <= 0.04MB)
 - увеличение heap и уменьшение allocs,
 - уменьшение нагрузки на GC.
 
-Ссылка на коммит с оптимизацией: 
+Ссылка на коммит с оптимизацией: https://github.com/UnendingLoop/pprof-optimization/commit/98ecbe6e97def8b0ed1c49262b72aa594df480b1
 
 
 #### Результаты по GC
