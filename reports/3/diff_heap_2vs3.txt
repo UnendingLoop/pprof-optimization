@@ -1,0 +1,126 @@
+File: orderservice
+Build ID: 487c9495939a70d53cff9154f72999aaf40499a6
+Type: inuse_space
+Time: 2026-04-13 15:43:45 CEST
+Showing nodes accounting for 19100.33kB, 206.58% of 9245.97kB total
+Dropped 5 nodes (cum <= 46.23kB)
+      flat  flat%   sum%        cum   cum%
+16401.07kB 177.39% 177.39% 16401.07kB 177.39%  orderservice/internal/kafka.EmulateMsgSending
+ 1089.33kB 11.78% 189.17%  1089.33kB 11.78%  github.com/segmentio/kafka-go/protocol.newPage
+ 1024.47kB 11.08% 200.25%  2064.79kB 22.33%  orderservice/internal/service.(*orderService).AddNewOrdersBulk
+  553.04kB  5.98% 206.23%   553.04kB  5.98%  github.com/segmentio/kafka-go.(*writeBatch).add
+  544.67kB  5.89% 212.12%   544.67kB  5.89%  bytes.growSlice
+ -532.26kB  5.76% 206.36%  -532.26kB  5.76%  github.com/jackc/pgx/v5/pgtype.(*Map).RegisterDefaultPgType (inline)
+  528.17kB  5.71% 212.08%   528.17kB  5.71%  regexp.(*bitState).reset
+  516.01kB  5.58% 217.66%   516.01kB  5.58%  runtime/pprof.(*profMap).lookup
+ -512.23kB  5.54% 212.12% -1536.28kB 16.62%  orderservice/internal/service.(*orderService).AddNewOrder
+  512.16kB  5.54% 217.66%   512.16kB  5.54%  reflect.growslice
+ -512.05kB  5.54% 212.12%  -512.05kB  5.54%  runtime.acquireSudog
+ -512.05kB  5.54% 206.58%  -512.05kB  5.54%  runtime/pprof.(*profileBuilder).emitLocation
+ -512.03kB  5.54% 201.04%  -512.03kB  5.54%  github.com/go-playground/validator.(*Validate).extractStructCache
+  512.03kB  5.54% 206.58%   512.03kB  5.54%  reflect.(*rtype).ptrTo
+  512.02kB  5.54% 212.12%   512.03kB  5.54%  github.com/segmentio/kafka-go/protocol.structDecodeFuncOf.func1.1
+ -512.01kB  5.54% 206.58%  -512.01kB  5.54%  github.com/jackc/pgx/v5/pgtype.scanPlanString.Scan
+         0     0% 206.58%   544.67kB  5.89%  bytes.(*Buffer).Grow (inline)
+         0     0% 206.58%   544.67kB  5.89%  bytes.(*Buffer).grow
+         0     0% 206.58%  -532.26kB  5.76%  database/sql.(*DB).Ping
+         0     0% 206.58%  -532.26kB  5.76%  database/sql.(*DB).PingContext
+         0     0% 206.58%  -532.26kB  5.76%  database/sql.(*DB).PingContext.func1
+         0     0% 206.58%  -532.26kB  5.76%  database/sql.(*DB).conn
+         0     0% 206.58%  -532.26kB  5.76%  database/sql.(*DB).retry
+         0     0% 206.58%  -512.01kB  5.54%  database/sql.(*Rows).Next
+         0     0% 206.58%  -512.01kB  5.54%  database/sql.(*Rows).Next.func1
+         0     0% 206.58%  -512.01kB  5.54%  database/sql.(*Rows).nextLocked
+         0     0% 206.58%  -512.01kB  5.54%  database/sql.withLock
+         0     0% 206.58%   512.16kB  5.54%  encoding/json.(*decodeState).array
+         0     0% 206.58%   512.16kB  5.54%  encoding/json.(*decodeState).object
+         0     0% 206.58%   512.16kB  5.54%  encoding/json.(*decodeState).unmarshal
+         0     0% 206.58%   512.16kB  5.54%  encoding/json.(*decodeState).value
+         0     0% 206.58%   512.16kB  5.54%  encoding/json.Unmarshal
+         0     0% 206.58%   528.17kB  5.71%  github.com/go-playground/validator.New.wrapFunc.func3
+         0     0% 206.58%   528.17kB  5.71%  github.com/go-playground/validator.isEmail
+         0     0% 206.58%  -532.26kB  5.76%  github.com/jackc/pgx/v5.ConnectConfig
+         0     0% 206.58%  -532.26kB  5.76%  github.com/jackc/pgx/v5.connect
+         0     0% 206.58%  -532.26kB  5.76%  github.com/jackc/pgx/v5/pgtype.NewMap
+         0     0% 206.58%  -532.26kB  5.76%  github.com/jackc/pgx/v5/pgtype.initDefaultMap
+         0     0% 206.58%  -532.26kB  5.76%  github.com/jackc/pgx/v5/pgtype.registerDefaultPgTypeVariants[go.shape.[]github.com/jackc/pgx/v5/pgtype.Range[github.com/jackc/pgx/v5/pgtype.Float8]]
+         0     0% 206.58%  -512.01kB  5.54%  github.com/jackc/pgx/v5/stdlib.(*Rows).Next
+         0     0% 206.58%  -512.01kB  5.54%  github.com/jackc/pgx/v5/stdlib.(*Rows).Next.func14
+         0     0% 206.58%  -532.26kB  5.76%  github.com/jackc/pgx/v5/stdlib.connector.Connect
+         0     0% 206.58%   544.67kB  5.89%  github.com/segmentio/kafka-go.(*Conn).ReadBatchWith
+         0     0% 206.58%   544.67kB  5.89%  github.com/segmentio/kafka-go.(*Reader).start.func1
+         0     0% 206.58%   553.04kB  5.98%  github.com/segmentio/kafka-go.(*Writer).WriteMessages
+         0     0% 206.58%   553.04kB  5.98%  github.com/segmentio/kafka-go.(*Writer).batchMessages
+         0     0% 206.58%  1089.33kB 11.78%  github.com/segmentio/kafka-go.(*conn).roundTrip
+         0     0% 206.58%  1089.33kB 11.78%  github.com/segmentio/kafka-go.(*conn).run
+         0     0% 206.58%   553.04kB  5.98%  github.com/segmentio/kafka-go.(*partitionWriter).writeMessages
+         0     0% 206.58%   544.67kB  5.89%  github.com/segmentio/kafka-go.(*reader).read
+         0     0% 206.58%   544.67kB  5.89%  github.com/segmentio/kafka-go.(*reader).run
+         0     0% 206.58%   544.67kB  5.89%  github.com/segmentio/kafka-go.acquireBuffer (inline)
+         0     0% 206.58%   544.67kB  5.89%  github.com/segmentio/kafka-go.init.func2
+         0     0% 206.58%   544.67kB  5.89%  github.com/segmentio/kafka-go.newBuffer
+         0     0% 206.58%   544.67kB  5.89%  github.com/segmentio/kafka-go.newMessageSetReader
+         0     0% 206.58%  1089.33kB 11.78%  github.com/segmentio/kafka-go/protocol.(*Conn).RoundTrip
+         0     0% 206.58%  1089.33kB 11.78%  github.com/segmentio/kafka-go/protocol.(*encoder).Write
+         0     0% 206.58%  1089.33kB 11.78%  github.com/segmentio/kafka-go/protocol.(*encoder).writeInt32 (inline)
+         0     0% 206.58%  1089.33kB 11.78%  github.com/segmentio/kafka-go/protocol.(*pageBuffer).Write
+         0     0% 206.58%  1089.33kB 11.78%  github.com/segmentio/kafka-go/protocol.(*pageBuffer).newPage (inline)
+         0     0% 206.58%  1024.05kB 11.08%  github.com/segmentio/kafka-go/protocol.Register
+         0     0% 206.58%  1089.33kB 11.78%  github.com/segmentio/kafka-go/protocol.RoundTrip
+         0     0% 206.58%  1089.33kB 11.78%  github.com/segmentio/kafka-go/protocol.WriteRequest
+         0     0% 206.58%  1024.19kB 11.08%  github.com/segmentio/kafka-go/protocol.arrayDecodeFuncOf
+         0     0% 206.58%  1024.05kB 11.08%  github.com/segmentio/kafka-go/protocol.decodeFuncOf
+         0     0% 206.58%   512.03kB  5.54%  github.com/segmentio/kafka-go/protocol.forEach
+         0     0% 206.58%   512.03kB  5.54%  github.com/segmentio/kafka-go/protocol.forEachStructField
+         0     0% 206.58%   512.03kB  5.54%  github.com/segmentio/kafka-go/protocol.forEachStructTag
+         0     0% 206.58%   512.03kB  5.54%  github.com/segmentio/kafka-go/protocol.forEachStructTag.func1
+         0     0% 206.58%  1024.05kB 11.08%  github.com/segmentio/kafka-go/protocol.makeTypes
+         0     0% 206.58%  1024.05kB 11.08%  github.com/segmentio/kafka-go/protocol.structDecodeFuncOf
+         0     0% 206.58%   512.03kB  5.54%  github.com/segmentio/kafka-go/protocol.structDecodeFuncOf.func1
+         0     0% 206.58%  1024.05kB 11.08%  github.com/segmentio/kafka-go/protocol.typesOf
+         0     0% 206.58%   512.16kB  5.54%  github.com/segmentio/kafka-go/protocol/createacls.init.0
+         0     0% 206.58%   512.02kB  5.54%  github.com/segmentio/kafka-go/protocol/createtopics.init.0
+         0     0% 206.58%  -512.02kB  5.54%  github.com/segmentio/kafka-go/protocol/describeacls.init.0
+         0     0% 206.58%   512.02kB  5.54%  github.com/segmentio/kafka-go/protocol/findcoordinator.init.0
+         0     0% 206.58% -1024.31kB 11.08%  github.com/segmentio/kafka-go/protocol/joingroup.init.0
+         0     0% 206.58%   512.16kB  5.54%  github.com/segmentio/kafka-go/protocol/metadata.init.0
+         0     0% 206.58%   512.03kB  5.54%  github.com/segmentio/kafka-go/protocol/offsetdelete.init.0
+         0     0% 206.58%  -512.01kB  5.54%  gorm.io/gorm.(*DB).Find
+         0     0% 206.58%  -512.01kB  5.54%  gorm.io/gorm.(*DB).FirstOrCreate
+         0     0% 206.58%  -512.01kB  5.54%  gorm.io/gorm.(*processor).Execute
+         0     0% 206.58%  -532.26kB  5.76%  gorm.io/gorm.Open
+         0     0% 206.58%  -512.01kB  5.54%  gorm.io/gorm.Scan
+         0     0% 206.58%  -512.01kB  5.54%  gorm.io/gorm/callbacks.Query
+         0     0% 206.58%  -532.26kB  5.76%  main.main
+         0     0% 206.58%  -532.26kB  5.76%  orderservice/internal/app.(*App).Run
+         0     0% 206.58%  -532.26kB  5.76%  orderservice/internal/db.ConnectPostgres
+         0     0% 206.58%   553.04kB  5.98%  orderservice/internal/kafka.EmulateMsgSending.func2
+         0     0% 206.58% -1536.28kB 16.62%  orderservice/internal/kafka.StartConsumer
+         0     0% 206.58%  2064.79kB 22.33%  orderservice/internal/kafka.StartConsumer.func3
+         0     0% 206.58%  -512.01kB  5.54%  orderservice/internal/repository.(*orderRepository).AddNewOrder
+         0     0% 206.58%  -512.01kB  5.54%  orderservice/internal/repository.(*orderRepository).AddNewOrder.func1
+         0     0% 206.58%   512.03kB  5.54%  reflect.PointerTo (inline)
+         0     0% 206.58%   512.03kB  5.54%  reflect.PtrTo (inline)
+         0     0% 206.58%   512.16kB  5.54%  reflect.Value.Grow
+         0     0% 206.58%   512.16kB  5.54%  reflect.Value.grow
+         0     0% 206.58%   528.17kB  5.71%  regexp.(*Regexp).MatchString (inline)
+         0     0% 206.58%   528.17kB  5.71%  regexp.(*Regexp).backtrack
+         0     0% 206.58%   528.17kB  5.71%  regexp.(*Regexp).doExecute
+         0     0% 206.58%   528.17kB  5.71%  regexp.(*Regexp).doMatch (inline)
+         0     0% 206.58%  -512.05kB  5.54%  runtime.chanrecv
+         0     0% 206.58%  -512.05kB  5.54%  runtime.chanrecv1
+         0     0% 206.58%  1024.05kB 11.08%  runtime.doInit (inline)
+         0     0% 206.58%  1024.05kB 11.08%  runtime.doInit1
+         0     0% 206.58%   491.79kB  5.32%  runtime.main
+         0     0% 206.58%     1539kB 16.65%  runtime.mcall
+         0     0% 206.58%    -1539kB 16.65%  runtime.mstart
+         0     0% 206.58%    -1539kB 16.65%  runtime.mstart0
+         0     0% 206.58%    -1539kB 16.65%  runtime.mstart1
+         0     0% 206.58%     1539kB 16.65%  runtime.park_m
+         0     0% 206.58%  -512.05kB  5.54%  runtime.unique_runtime_registerUniqueMapCleanup.func2
+         0     0% 206.58%   516.01kB  5.58%  runtime/pprof.(*profileBuilder).addCPUData
+         0     0% 206.58%  -512.05kB  5.54%  runtime/pprof.(*profileBuilder).appendLocsForStack
+         0     0% 206.58%  -512.05kB  5.54%  runtime/pprof.(*profileBuilder).build
+         0     0% 206.58%  -532.26kB  5.76%  sync.(*Once).Do (inline)
+         0     0% 206.58%  -532.26kB  5.76%  sync.(*Once).doSlow
+         0     0% 206.58%   544.67kB  5.89%  sync.(*Pool).Get

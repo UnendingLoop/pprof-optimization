@@ -1,0 +1,96 @@
+File: orderservice
+Build ID: 487c9495939a70d53cff9154f72999aaf40499a6
+Type: inuse_space
+Time: 2026-04-15 17:15:44 CEST
+Showing nodes accounting for 28346.30kB, 100% of 28346.30kB total
+      flat  flat%   sum%        cum   cum%
+16401.07kB 57.86% 57.86% 16401.07kB 57.86%  orderservice/internal/kafka.EmulateMsgSending
+    4617kB 16.29% 74.15%     4617kB 16.29%  runtime.allocm
+ 1089.33kB  3.84% 77.99%  1089.33kB  3.84%  github.com/segmentio/kafka-go/protocol.newPage
+ 1024.47kB  3.61% 81.60%  2064.79kB  7.28%  orderservice/internal/service.(*orderService).AddNewOrdersBulk
+ 1024.18kB  3.61% 85.22%  1536.21kB  5.42%  github.com/segmentio/kafka-go/protocol.structDecodeFuncOf.func1.1
+  553.04kB  1.95% 87.17%   553.04kB  1.95%  github.com/segmentio/kafka-go.(*writeBatch).add
+  544.67kB  1.92% 89.09%   544.67kB  1.92%  bytes.growSlice
+  528.17kB  1.86% 90.95%   528.17kB  1.86%  regexp.(*bitState).reset
+  516.01kB  1.82% 92.77%   516.01kB  1.82%  runtime/pprof.(*profMap).lookup
+  512.16kB  1.81% 94.58%   512.16kB  1.81%  github.com/segmentio/kafka-go/protocol.structEncodeFuncOf.func1.1
+  512.16kB  1.81% 96.39%   512.16kB  1.81%  reflect.growslice
+  512.03kB  1.81% 98.19%   512.03kB  1.81%  reflect.(*rtype).ptrTo
+  512.02kB  1.81%   100%  2048.23kB  7.23%  github.com/segmentio/kafka-go/protocol.structDecodeFuncOf
+         0     0%   100%   544.67kB  1.92%  bytes.(*Buffer).Grow (inline)
+         0     0%   100%   544.67kB  1.92%  bytes.(*Buffer).grow
+         0     0%   100%   512.16kB  1.81%  encoding/json.(*decodeState).array
+         0     0%   100%   512.16kB  1.81%  encoding/json.(*decodeState).object
+         0     0%   100%   512.16kB  1.81%  encoding/json.(*decodeState).unmarshal
+         0     0%   100%   512.16kB  1.81%  encoding/json.(*decodeState).value
+         0     0%   100%   512.16kB  1.81%  encoding/json.Unmarshal
+         0     0%   100%   528.17kB  1.86%  github.com/go-playground/validator.(*Validate).Struct (inline)
+         0     0%   100%   528.17kB  1.86%  github.com/go-playground/validator.(*Validate).StructCtx
+         0     0%   100%   528.17kB  1.86%  github.com/go-playground/validator.(*validate).traverseField
+         0     0%   100%   528.17kB  1.86%  github.com/go-playground/validator.(*validate).validateStruct
+         0     0%   100%   528.17kB  1.86%  github.com/go-playground/validator.New.wrapFunc.func3
+         0     0%   100%   528.17kB  1.86%  github.com/go-playground/validator.isEmail
+         0     0%   100%   544.67kB  1.92%  github.com/segmentio/kafka-go.(*Conn).ReadBatchWith
+         0     0%   100%   544.67kB  1.92%  github.com/segmentio/kafka-go.(*Reader).start.func1
+         0     0%   100%   553.04kB  1.95%  github.com/segmentio/kafka-go.(*Writer).WriteMessages
+         0     0%   100%   553.04kB  1.95%  github.com/segmentio/kafka-go.(*Writer).batchMessages
+         0     0%   100%  1089.33kB  3.84%  github.com/segmentio/kafka-go.(*conn).roundTrip
+         0     0%   100%  1089.33kB  3.84%  github.com/segmentio/kafka-go.(*conn).run
+         0     0%   100%   553.04kB  1.95%  github.com/segmentio/kafka-go.(*partitionWriter).writeMessages
+         0     0%   100%   544.67kB  1.92%  github.com/segmentio/kafka-go.(*reader).read
+         0     0%   100%   544.67kB  1.92%  github.com/segmentio/kafka-go.(*reader).run
+         0     0%   100%   544.67kB  1.92%  github.com/segmentio/kafka-go.acquireBuffer (inline)
+         0     0%   100%   544.67kB  1.92%  github.com/segmentio/kafka-go.init.func2
+         0     0%   100%   544.67kB  1.92%  github.com/segmentio/kafka-go.newBuffer
+         0     0%   100%   544.67kB  1.92%  github.com/segmentio/kafka-go.newMessageSetReader
+         0     0%   100%  1089.33kB  3.84%  github.com/segmentio/kafka-go/protocol.(*Conn).RoundTrip
+         0     0%   100%  1089.33kB  3.84%  github.com/segmentio/kafka-go/protocol.(*encoder).Write
+         0     0%   100%  1089.33kB  3.84%  github.com/segmentio/kafka-go/protocol.(*encoder).writeInt32 (inline)
+         0     0%   100%  1089.33kB  3.84%  github.com/segmentio/kafka-go/protocol.(*pageBuffer).Write
+         0     0%   100%  1089.33kB  3.84%  github.com/segmentio/kafka-go/protocol.(*pageBuffer).newPage (inline)
+         0     0%   100%  2560.39kB  9.03%  github.com/segmentio/kafka-go/protocol.Register
+         0     0%   100%  1089.33kB  3.84%  github.com/segmentio/kafka-go/protocol.RoundTrip
+         0     0%   100%  1089.33kB  3.84%  github.com/segmentio/kafka-go/protocol.WriteRequest
+         0     0%   100%  1024.19kB  3.61%  github.com/segmentio/kafka-go/protocol.arrayDecodeFuncOf
+         0     0%   100%  2048.23kB  7.23%  github.com/segmentio/kafka-go/protocol.decodeFuncOf
+         0     0%   100%   512.16kB  1.81%  github.com/segmentio/kafka-go/protocol.encodeFuncOf
+         0     0%   100%  2048.37kB  7.23%  github.com/segmentio/kafka-go/protocol.forEach
+         0     0%   100%  2048.37kB  7.23%  github.com/segmentio/kafka-go/protocol.forEachStructField
+         0     0%   100%  2048.37kB  7.23%  github.com/segmentio/kafka-go/protocol.forEachStructTag
+         0     0%   100%  2048.37kB  7.23%  github.com/segmentio/kafka-go/protocol.forEachStructTag.func1
+         0     0%   100%  2560.39kB  9.03%  github.com/segmentio/kafka-go/protocol.makeTypes
+         0     0%   100%  1536.21kB  5.42%  github.com/segmentio/kafka-go/protocol.structDecodeFuncOf.func1
+         0     0%   100%   512.16kB  1.81%  github.com/segmentio/kafka-go/protocol.structEncodeFuncOf
+         0     0%   100%   512.16kB  1.81%  github.com/segmentio/kafka-go/protocol.structEncodeFuncOf.func1
+         0     0%   100%  2560.39kB  9.03%  github.com/segmentio/kafka-go/protocol.typesOf
+         0     0%   100%   512.16kB  1.81%  github.com/segmentio/kafka-go/protocol/createacls.init.0
+         0     0%   100%   512.02kB  1.81%  github.com/segmentio/kafka-go/protocol/createtopics.init.0
+         0     0%   100%   512.02kB  1.81%  github.com/segmentio/kafka-go/protocol/findcoordinator.init.0
+         0     0%   100%   512.16kB  1.81%  github.com/segmentio/kafka-go/protocol/metadata.init.0
+         0     0%   100%   512.03kB  1.81%  github.com/segmentio/kafka-go/protocol/offsetdelete.init.0
+         0     0%   100%   553.04kB  1.95%  orderservice/internal/kafka.EmulateMsgSending.func2
+         0     0%   100%  2064.79kB  7.28%  orderservice/internal/kafka.StartConsumer.func3
+         0     0%   100%   512.03kB  1.81%  reflect.PointerTo (inline)
+         0     0%   100%   512.03kB  1.81%  reflect.PtrTo (inline)
+         0     0%   100%   512.16kB  1.81%  reflect.Value.Grow
+         0     0%   100%   512.16kB  1.81%  reflect.Value.grow
+         0     0%   100%   528.17kB  1.86%  regexp.(*Regexp).MatchString (inline)
+         0     0%   100%   528.17kB  1.86%  regexp.(*Regexp).backtrack
+         0     0%   100%   528.17kB  1.86%  regexp.(*Regexp).doExecute
+         0     0%   100%   528.17kB  1.86%  regexp.(*Regexp).doMatch (inline)
+         0     0%   100%  2560.39kB  9.03%  runtime.doInit (inline)
+         0     0%   100%  2560.39kB  9.03%  runtime.doInit1
+         0     0%   100%  2560.39kB  9.03%  runtime.main
+         0     0%   100%     2565kB  9.05%  runtime.mcall
+         0     0%   100%     2052kB  7.24%  runtime.mstart
+         0     0%   100%     2052kB  7.24%  runtime.mstart0
+         0     0%   100%     2052kB  7.24%  runtime.mstart1
+         0     0%   100%     4617kB 16.29%  runtime.newm
+         0     0%   100%     2565kB  9.05%  runtime.park_m
+         0     0%   100%     4617kB 16.29%  runtime.resetspinning
+         0     0%   100%     4617kB 16.29%  runtime.schedule
+         0     0%   100%     4617kB 16.29%  runtime.startm
+         0     0%   100%     4617kB 16.29%  runtime.wakep
+         0     0%   100%   516.01kB  1.82%  runtime/pprof.(*profileBuilder).addCPUData
+         0     0%   100%   516.01kB  1.82%  runtime/pprof.profileWriter
+         0     0%   100%   544.67kB  1.92%  sync.(*Pool).Get

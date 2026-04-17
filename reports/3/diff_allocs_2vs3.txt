@@ -1,0 +1,176 @@
+File: orderservice
+Build ID: 487c9495939a70d53cff9154f72999aaf40499a6
+Type: alloc_space
+Time: 2026-04-13 15:43:21 CEST
+Showing nodes accounting for -1003.40MB, 42.36% of 2368.71MB total
+Dropped 326 nodes (cum <= 11.84MB)
+      flat  flat%   sum%        cum   cum%
+ -220.12MB  9.29%  9.29%  -245.62MB 10.37%  gorm.io/gorm.(*Statement).clone
+ -163.10MB  6.89% 16.18%  -188.60MB  7.96%  gorm.io/gorm.(*Statement).AddClause
+   75.60MB  3.19% 12.99%   124.23MB  5.24%  github.com/jackc/pgx/v5.(*ExtendedQueryBuilder).appendParam
+  -71.50MB  3.02% 16.01%  -186.51MB  7.87%  github.com/go-playground/validator.(*Validate).extractStructCache
+   70.75MB  2.99% 13.02%    70.75MB  2.99%  github.com/segmentio/kafka-go.(*writeBatch).add
+  -69.30MB  2.93% 15.94%   -99.80MB  4.21%  github.com/go-playground/validator.New
+  -63.51MB  2.68% 18.62%  -100.51MB  4.24%  github.com/go-playground/validator.(*Validate).parseFieldTagsRecursive
+   50.71MB  2.14% 16.48%    68.78MB  2.90%  github.com/jackc/pgx/v5/pgproto3.(*Bind).Encode
+  -49.01MB  2.07% 18.55%  -143.56MB  6.06%  gorm.io/gorm.(*DB).Session
+  -47.01MB  1.98% 20.54%  -117.52MB  4.96%  gorm.io/gorm.Scan
+  -44.01MB  1.86% 22.40%   -44.01MB  1.86%  gorm.io/gorm.(*Statement).SelectAndOmitColumns
+     -43MB  1.82% 24.21%   -52.99MB  2.24%  gorm.io/gorm/clause.Values.Build
+  -42.01MB  1.77% 25.98%  -193.08MB  8.15%  gorm.io/gorm.(*DB).getInstance
+   41.20MB  1.74% 24.25%   501.94MB 21.19%  orderservice/internal/service.(*orderService).AddNewOrdersBulk
+  -37.50MB  1.58% 25.83%   -37.50MB  1.58%  strings.genSplit
+   36.60MB  1.55% 24.28%    36.60MB  1.55%  github.com/jackc/pgx/v5/pgtype.encodePlanStringToAnyTextFormat.Encode
+  -35.96MB  1.52% 25.80%   -41.96MB  1.77%  gorm.io/gorm/callbacks.ConvertToCreateValues
+  -34.50MB  1.46% 27.26%   -38.50MB  1.63%  github.com/jackc/pgx/v5/stdlib.(*Rows).Next
+  -34.07MB  1.44% 28.70%   -34.07MB  1.44%  sync.(*Pool).pinSlow
+  -30.01MB  1.27% 29.96%   -30.01MB  1.27%  github.com/jackc/pgx/v5.(*Conn).getRows
+  -27.50MB  1.16% 31.12%   -27.50MB  1.16%  internal/sync.newIndirectNode[go.shape.interface {},go.shape.interface {}] (inline)
+     -26MB  1.10% 32.22%      -26MB  1.10%  github.com/go-playground/validator.wrapFunc (inline)
+  -20.50MB  0.87% 33.09%   -22.49MB  0.95%  gorm.io/gorm.(*Statement).AddVar
+  -19.01MB   0.8% 33.89% -1634.08MB 68.99%  orderservice/internal/service.(*orderService).AddNewOrder
+   18.07MB  0.76% 33.13%    18.07MB  0.76%  github.com/jackc/pgx/v5/internal/pgio.AppendUint32 (inline)
+     -16MB  0.68% 33.80%   114.54MB  4.84%  database/sql.(*DB).queryDC
+     -15MB  0.63% 34.44%      -15MB  0.63%  strings.(*Builder).grow
+  -14.50MB  0.61% 35.05%   -14.50MB  0.61%  github.com/go-playground/validator.(*structCache).Set
+  -13.50MB  0.57% 35.62% -1157.37MB 48.86%  orderservice/internal/repository.(*orderRepository).AddNewOrder.func1
+     -13MB  0.55% 36.17%   -23.20MB  0.98%  gorm.io/gorm/callbacks.RegisterDefaultCallbacks.Create.func3
+     -13MB  0.55% 36.72%   -13.50MB  0.57%  gorm.io/gorm.(*Statement).BuildCondition
+     -13MB  0.55% 37.26%   -68.51MB  2.89%  gorm.io/gorm/callbacks.BuildQuerySQL
+   10.56MB  0.45% 36.82%    10.56MB  0.45%  orderservice/internal/repository.convertOrdersToSubEntities
+   10.53MB  0.44% 36.37%    10.53MB  0.44%  github.com/jackc/pgx/v5/internal/pgio.AppendUint64 (inline)
+  -10.44MB  0.44% 36.81%   136.55MB  5.76%  github.com/jackc/pgx/v5/stdlib.(*Conn).QueryContext
+     -10MB  0.42% 37.24%      -10MB  0.42%  github.com/jackc/pgx/v5/stdlib.(*Rows).Columns
+     -10MB  0.42% 37.66%      -10MB  0.42%  gorm.io/gorm/clause.AssignmentColumns (inline)
+   -9.99MB  0.42% 38.08%    -9.99MB  0.42%  strings.(*Builder).WriteByte (partial-inline)
+    9.04MB  0.38% 37.70%     9.04MB  0.38%  bytes.growSlice
+      -9MB  0.38% 38.08%   -47.50MB  2.01%  database/sql.(*Rows).nextLocked
+   -8.50MB  0.36% 38.44%    -8.50MB  0.36%  github.com/go-playground/validator.New.func1
+   -8.50MB  0.36% 38.80%    -8.50MB  0.36%  reflect.New
+   -8.50MB  0.36% 39.16%    -8.50MB  0.36%  internal/sync.newEntryNode[go.shape.interface {},go.shape.interface {}] (inline)
+    8.09MB  0.34% 38.81%     8.09MB  0.34%  database/sql.driverArgsConnLocked
+   -7.50MB  0.32% 39.13%   -15.50MB  0.65%  gorm.io/gorm.(*DB).Order
+   -7.01MB   0.3% 39.43%    -7.01MB   0.3%  github.com/segmentio/kafka-go.readNewBytes
+      -7MB   0.3% 39.72%  -100.53MB  4.24%  orderservice/internal/repository.(*orderRepository).GetOrderByUID
+      -7MB   0.3% 40.02%       -7MB   0.3%  github.com/jackc/pgx/v5/pgconn.(*PgConn).convertRowDescription
+      -7MB   0.3% 40.31%       -7MB   0.3%  strings.(*Builder).WriteString (inline)
+   -6.50MB  0.27% 40.59%  -393.90MB 16.63%  gorm.io/gorm/callbacks.saveAssociations
+   -6.50MB  0.27% 40.86%    -6.50MB  0.27%  gorm.io/gorm/clause.OnConflict.MergeClause
+    5.51MB  0.23% 40.63%     5.51MB  0.23%  github.com/jackc/pgx/v5.(*ExtendedQueryBuilder).reset (inline)
+    5.51MB  0.23% 40.40%     5.51MB  0.23%  github.com/jackc/pgx/v5/pgproto3.(*Frontend).Flush
+   -5.50MB  0.23% 40.63%      -11MB  0.46%  database/sql.(*Rows).initContextClose
+      -5MB  0.21% 40.84%      -10MB  0.42%  github.com/segmentio/kafka-go.(*Generation).CommitOffsets
+      -5MB  0.21% 41.05%       -9MB  0.38%  gorm.io/gorm/clause.Returning.Build
+   -4.50MB  0.19% 41.24%   -10.50MB  0.44%  gorm.io/gorm/clause.OrderBy.Build
+   -4.50MB  0.19% 41.43%    -8.50MB  0.36%  gorm.io/gorm/clause.Set.Build
+   -3.50MB  0.15% 41.58%      -16MB  0.68%  gorm.io/gorm.(*DB).Preload (inline)
+   -3.50MB  0.15% 41.73%    -7.50MB  0.32%  database/sql.(*DB).beginDC
+      -3MB  0.13% 41.85% -1642.08MB 69.32%  orderservice/internal/kafka.StartConsumer
+      -3MB  0.13% 41.98%  -581.35MB 24.54%  gorm.io/gorm.(*processor).Execute
+      -3MB  0.13% 42.11%   -78.54MB  3.32%  gorm.io/gorm.(*DB).Limit
+    2.50MB  0.11% 42.00%    72.75MB  3.07%  github.com/segmentio/kafka-go.(*Writer).batchMessages
+   -2.50MB  0.11% 42.11%   -12.50MB  0.53%  gorm.io/gorm/callbacks.onConflictOption
+   -2.50MB  0.11% 42.21%      -11MB  0.46%  gorm.io/gorm/clause.OnConflict.Build
+   -2.50MB  0.11% 42.32%   140.39MB  5.93%  github.com/jackc/pgx/v5.(*Conn).Query
+    1.50MB 0.063% 42.26%    10.54MB  0.45%  github.com/segmentio/kafka-go.newMessageSetReader
+   -1.50MB 0.063% 42.32%    -5.50MB  0.23%  context.WithCancel
+    1.50MB 0.063% 42.26%    11.03MB  0.47%  github.com/jackc/pgx/v5/pgtype.(*wrapUintEncodePlan).Encode
+       1MB 0.042% 42.21%  -132.57MB  5.60%  github.com/go-playground/validator.(*validate).traverseField
+      -1MB 0.042% 42.26%    70.25MB  2.97%  github.com/segmentio/kafka-go.(*partitionWriter).writeMessages
+      -1MB 0.042% 42.30%    -8.50MB  0.36%  database/sql.(*DB).begin
+    0.50MB 0.021% 42.28%    11.04MB  0.47%  github.com/segmentio/kafka-go.(*Conn).ReadBatchWith
+    0.50MB 0.021% 42.26%   421.45MB 17.79%  orderservice/internal/repository.(*orderRepository).AddNewOrdersBulk.func1
+   -0.50MB 0.021% 42.28%    23.23MB  0.98%  database/sql.(*DB).execDC
+   -0.50MB 0.021% 42.30%  -206.03MB  8.70%  gorm.io/gorm.(*DB).Find
+   -0.50MB 0.021% 42.32%   -14.01MB  0.59%  gorm.io/gorm.(*DB).Where
+   -0.50MB 0.021% 42.34%  -997.32MB 42.10%  gorm.io/gorm.(*DB).FirstOrCreate
+   -0.50MB 0.021% 42.36%  -401.90MB 16.97%  gorm.io/gorm/callbacks.RegisterDefaultCallbacks.SaveAfterAssociations.func4
+         0     0% 42.36%     9.04MB  0.38%  bytes.(*Buffer).Grow (inline)
+         0     0% 42.36%     9.04MB  0.38%  bytes.(*Buffer).grow
+         0     0% 42.36%    -8.50MB  0.36%  database/sql.(*DB).BeginTx
+         0     0% 42.36%    -8.50MB  0.36%  database/sql.(*DB).BeginTx.func1
+         0     0% 42.36%   -13.50MB  0.57%  database/sql.(*DB).QueryContext
+         0     0% 42.36%   -13.50MB  0.57%  database/sql.(*DB).QueryContext.func1
+         0     0% 42.36%    23.73MB  1.00%  database/sql.(*DB).execDC.func2
+         0     0% 42.36%   -13.50MB  0.57%  database/sql.(*DB).query
+         0     0% 42.36%   141.54MB  5.98%  database/sql.(*DB).queryDC.func1
+         0     0% 42.36%   -21.49MB  0.91%  database/sql.(*DB).retry
+         0     0% 42.36%      -10MB  0.42%  database/sql.(*Rows).Columns
+         0     0% 42.36%   -48.50MB  2.05%  database/sql.(*Rows).Next
+         0     0% 42.36%   -47.50MB  2.01%  database/sql.(*Rows).Next.func1
+         0     0% 42.36%    22.73MB  0.96%  database/sql.(*Tx).ExecContext
+         0     0% 42.36%   126.04MB  5.32%  database/sql.(*Tx).QueryContext
+         0     0% 42.36%    20.64MB  0.87%  database/sql.ctxDriverExec
+         0     0% 42.36%   136.55MB  5.76%  database/sql.ctxDriverQuery
+         0     0% 42.36%   114.77MB  4.85%  database/sql.withLock
+         0     0% 42.36%  -228.15MB  9.63%  github.com/go-playground/validator.(*Validate).Struct (inline)
+         0     0% 42.36%  -228.15MB  9.63%  github.com/go-playground/validator.(*Validate).StructCtx
+         0     0% 42.36%  -186.58MB  7.88%  github.com/go-playground/validator.(*validate).validateStruct
+         0     0% 42.36%    21.63MB  0.91%  github.com/jackc/pgx/v5.(*Conn).Exec
+         0     0% 42.36%    21.63MB  0.91%  github.com/jackc/pgx/v5.(*Conn).exec
+         0     0% 42.36%    22.13MB  0.93%  github.com/jackc/pgx/v5.(*Conn).execPrepared
+         0     0% 42.36%   124.23MB  5.24%  github.com/jackc/pgx/v5.(*ExtendedQueryBuilder).Build
+         0     0% 42.36%    48.63MB  2.05%  github.com/jackc/pgx/v5.(*ExtendedQueryBuilder).encodeExtendedParamValue
+         0     0% 42.36%    18.07MB  0.76%  github.com/jackc/pgx/v5/internal/pgio.AppendInt32 (inline)
+         0     0% 42.36%    10.53MB  0.44%  github.com/jackc/pgx/v5/internal/pgio.AppendInt64 (inline)
+         0     0% 42.36%    67.29MB  2.84%  github.com/jackc/pgx/v5/pgconn.(*PgConn).ExecPrepared
+         0     0% 42.36%     5.51MB  0.23%  github.com/jackc/pgx/v5/pgconn.(*PgConn).flushWithPotentialWriteReadDeadlock
+         0     0% 42.36%       -7MB   0.3%  github.com/jackc/pgx/v5/pgconn.(*ResultReader).readUntilRowDescription
+         0     0% 42.36%    -8.50MB  0.36%  github.com/jackc/pgx/v5/pgconn.(*ResultReader).receiveMessage
+         0     0% 42.36%    68.78MB  2.90%  github.com/jackc/pgx/v5/pgproto3.(*Frontend).SendBind
+         0     0% 42.36%    48.63MB  2.05%  github.com/jackc/pgx/v5/pgtype.(*Map).Encode
+         0     0% 42.36%    10.53MB  0.44%  github.com/jackc/pgx/v5/pgtype.encodePlanInt8CodecBinaryInt64Valuer.Encode
+         0     0% 42.36%    20.64MB  0.87%  github.com/jackc/pgx/v5/stdlib.(*Conn).ExecContext
+         0     0% 42.36%    -7.01MB   0.3%  github.com/segmentio/kafka-go.(*Batch).ReadMessage
+         0     0% 42.36%    -7.01MB   0.3%  github.com/segmentio/kafka-go.(*Batch).ReadMessage.func2
+         0     0% 42.36%    -7.01MB   0.3%  github.com/segmentio/kafka-go.(*Batch).readMessage
+         0     0% 42.36%      -12MB  0.51%  github.com/segmentio/kafka-go.(*Generation).Start.func1
+         0     0% 42.36%      -12MB  0.51%  github.com/segmentio/kafka-go.(*Reader).commitLoop
+         0     0% 42.36%      -12MB  0.51%  github.com/segmentio/kafka-go.(*Reader).commitLoopImmediate
+         0     0% 42.36%      -10MB  0.42%  github.com/segmentio/kafka-go.(*Reader).commitOffsetsWithRetry
+         0     0% 42.36%      -12MB  0.51%  github.com/segmentio/kafka-go.(*Reader).run.func3
+         0     0% 42.36%    73.75MB  3.11%  github.com/segmentio/kafka-go.(*Writer).WriteMessages
+         0     0% 42.36%    -7.01MB   0.3%  github.com/segmentio/kafka-go.(*messageSetReader).readMessage
+         0     0% 42.36%    -7.01MB   0.3%  github.com/segmentio/kafka-go.(*messageSetReader).readMessageV2
+         0     0% 42.36%    -7.01MB   0.3%  github.com/segmentio/kafka-go.(*messageSetReader).runFunc
+         0     0% 42.36%     9.04MB  0.38%  github.com/segmentio/kafka-go.acquireBuffer (inline)
+         0     0% 42.36%     9.04MB  0.38%  github.com/segmentio/kafka-go.init.func2
+         0     0% 42.36%     9.04MB  0.38%  github.com/segmentio/kafka-go.newBuffer
+         0     0% 42.36%      -14MB  0.59%  gorm.io/driver/postgres.Dialector.QuoteTo
+         0     0% 42.36%  -114.55MB  4.84%  gorm.io/gorm.(*DB).Begin
+         0     0% 42.36%   -80.04MB  3.38%  gorm.io/gorm.(*DB).Clauses
+         0     0% 42.36%  -352.32MB 14.87%  gorm.io/gorm.(*DB).Create
+         0     0% 42.36%   -53.51MB  2.26%  gorm.io/gorm.(*DB).First
+         0     0% 42.36%   -19.01MB   0.8%  gorm.io/gorm.(*DB).WithContext (inline)
+         0     0% 42.36%   -43.51MB  1.84%  gorm.io/gorm.(*Statement).AddClauseIfNotExists
+         0     0% 42.36%  -105.49MB  4.45%  gorm.io/gorm.(*Statement).Build
+         0     0% 42.36%      -14MB  0.59%  gorm.io/gorm.(*Statement).QuoteTo
+         0     0% 42.36%      -14MB  0.59%  gorm.io/gorm.(*Statement).QuoteTo.func1 (inline)
+         0     0% 42.36%      -10MB  0.42%  gorm.io/gorm.(*Statement).WriteQuoted
+         0     0% 42.36%       -7MB   0.3%  gorm.io/gorm.(*Statement).WriteString
+         0     0% 42.36%      -14MB  0.59%  gorm.io/gorm.(*Statement).clone.func1
+         0     0% 42.36%   -84.54MB  3.57%  gorm.io/gorm/callbacks.BeginTransaction
+         0     0% 42.36%  -231.53MB  9.77%  gorm.io/gorm/callbacks.Query
+         0     0% 42.36%      -15MB  0.63%  gorm.io/gorm/callbacks.RegisterDefaultCallbacks.SaveBeforeAssociations.func2
+         0     0% 42.36%       -9MB  0.38%  gorm.io/gorm/callbacks.saveAssociations.func1
+         0     0% 42.36%  -103.99MB  4.39%  gorm.io/gorm/clause.Clause.Build
+         0     0% 42.36%       -6MB  0.25%  gorm.io/gorm/clause.Where.Build
+         0     0% 42.36%       -6MB  0.25%  gorm.io/gorm/clause.buildExprs
+         0     0% 42.36%   -34.50MB  1.46%  internal/sync.(*HashTrieMap[go.shape.interface {},go.shape.interface {}]).Range
+         0     0% 42.36%   -24.50MB  1.03%  internal/sync.(*HashTrieMap[go.shape.interface {},go.shape.interface {}]).Store (inline)
+         0     0% 42.36%   -24.50MB  1.03%  internal/sync.(*HashTrieMap[go.shape.interface {},go.shape.interface {}]).Swap
+         0     0% 42.36%   -27.50MB  1.16%  internal/sync.(*HashTrieMap[go.shape.interface {},go.shape.interface {}]).init (inline)
+         0     0% 42.36%   -27.50MB  1.16%  internal/sync.(*HashTrieMap[go.shape.interface {},go.shape.interface {}]).initSlow
+         0     0% 42.36%      -23MB  0.97%  internal/sync.(*HashTrieMap[go.shape.interface {},go.shape.interface {}]).iter
+         0     0% 42.36%    73.75MB  3.11%  orderservice/internal/kafka.EmulateMsgSending.func2
+         0     0% 42.36%   502.44MB 21.21%  orderservice/internal/kafka.StartConsumer.func3
+         0     0% 42.36% -1157.37MB 48.86%  orderservice/internal/repository.(*orderRepository).AddNewOrder
+         0     0% 42.36%   432.01MB 18.24%  orderservice/internal/repository.(*orderRepository).AddNewOrdersBulk
+         0     0% 42.36%  -100.53MB  4.24%  orderservice/internal/service.(*orderService).GetOrderInfo
+         0     0% 42.36%      -15MB  0.63%  strings.(*Builder).Grow
+         0     0% 42.36%      -19MB   0.8%  strings.Split (inline)
+         0     0% 42.36%   -18.50MB  0.78%  strings.SplitN (inline)
+         0     0% 42.36%   -34.50MB  1.46%  sync.(*Map).Range (inline)
+         0     0% 42.36%   -24.50MB  1.03%  sync.(*Map).Store (inline)
+         0     0% 42.36%   -34.03MB  1.44%  sync.(*Pool).Get
+         0     0% 42.36%   -34.07MB  1.44%  sync.(*Pool).pin

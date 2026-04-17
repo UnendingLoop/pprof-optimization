@@ -1,0 +1,97 @@
+File: orderservice
+Build ID: 487c9495939a70d53cff9154f72999aaf40499a6
+Type: inuse_space
+Time: 2026-04-06 15:06:24 CEST
+Showing nodes accounting for 19560390B, 206.37% of 9478447B total
+Dropped 9 nodes (cum <= 47392B)
+      flat  flat%   sum%        cum   cum%
+ 16794693B 177.19% 177.19%  16794693B 177.19%  orderservice/internal/kafka.EmulateMsgSending
+  1115476B 11.77% 188.96%   1115476B 11.77%  github.com/segmentio/kafka-go/protocol.newPage
+ -1050625B 11.08% 177.87%  -1050625B 11.08%  runtime.allocm
+  1049056B 11.07% 188.94%   2114346B 22.31%  orderservice/internal/service.(*orderService).AddNewOrdersBulk
+  1048760B 11.06% 200.00%   1573080B 16.60%  github.com/segmentio/kafka-go/protocol.structDecodeFuncOf.func1.1
+   566314B  5.97% 205.98%    566314B  5.97%  github.com/segmentio/kafka-go.(*writeBatch).add
+   557738B  5.88% 211.86%    557738B  5.88%  bytes.growSlice
+   528394B  5.57% 217.44%    528394B  5.57%  runtime/pprof.(*profMap).lookup
+  -524992B  5.54% 211.90%   -524992B  5.54%  regexp/syntax.(*compiler).inst (inline)
+  -524528B  5.53% 206.37%  -1589706B 16.77%  orderservice/internal/service.(*orderService).AddNewOrder
+   524448B  5.53% 211.90%    524448B  5.53%  github.com/segmentio/kafka-go/protocol.structEncodeFuncOf.func1.1
+  -524336B  5.53% 206.37%   -524336B  5.53%  github.com/go-playground/validator.(*Validate).parseFieldTagsRecursive
+  -524336B  5.53% 200.84%   -524336B  5.53%  runtime.(*scavengerState).init
+   524320B  5.53% 206.37%    524320B  5.53%  reflect.(*rtype).ptrTo
+        8B 8.4e-05% 206.37%   1573088B 16.60%  github.com/segmentio/kafka-go/protocol.structDecodeFuncOf
+         0     0% 206.37%    557738B  5.88%  bytes.(*Buffer).Grow (inline)
+         0     0% 206.37%    557738B  5.88%  bytes.(*Buffer).grow
+         0     0% 206.37%   -536671B  5.66%  github.com/go-faker/faker/v4.init.0
+         0     0% 206.37%   -524336B  5.53%  github.com/go-playground/validator.(*Validate).Struct (inline)
+         0     0% 206.37%   -524336B  5.53%  github.com/go-playground/validator.(*Validate).StructCtx
+         0     0% 206.37%   -524336B  5.53%  github.com/go-playground/validator.(*Validate).extractStructCache
+         0     0% 206.37%   -524336B  5.53%  github.com/go-playground/validator.(*validate).traverseField
+         0     0% 206.37%   -524336B  5.53%  github.com/go-playground/validator.(*validate).validateStruct
+         0     0% 206.37%   -524992B  5.54%  github.com/jinzhu/inflection.compile
+         0     0% 206.37%   -524992B  5.54%  github.com/jinzhu/inflection.init.0
+         0     0% 206.37%    557738B  5.88%  github.com/segmentio/kafka-go.(*Conn).ReadBatchWith
+         0     0% 206.37%    557738B  5.88%  github.com/segmentio/kafka-go.(*Reader).start.func1
+         0     0% 206.37%    566314B  5.97%  github.com/segmentio/kafka-go.(*Writer).WriteMessages
+         0     0% 206.37%    566314B  5.97%  github.com/segmentio/kafka-go.(*Writer).batchMessages
+         0     0% 206.37%   1115476B 11.77%  github.com/segmentio/kafka-go.(*conn).roundTrip
+         0     0% 206.37%   1115476B 11.77%  github.com/segmentio/kafka-go.(*conn).run
+         0     0% 206.37%    566314B  5.97%  github.com/segmentio/kafka-go.(*partitionWriter).writeMessages
+         0     0% 206.37%    557738B  5.88%  github.com/segmentio/kafka-go.(*reader).read
+         0     0% 206.37%    557738B  5.88%  github.com/segmentio/kafka-go.(*reader).run
+         0     0% 206.37%    557738B  5.88%  github.com/segmentio/kafka-go.acquireBuffer (inline)
+         0     0% 206.37%    557738B  5.88%  github.com/segmentio/kafka-go.init.func2
+         0     0% 206.37%    557738B  5.88%  github.com/segmentio/kafka-go.newBuffer
+         0     0% 206.37%    557738B  5.88%  github.com/segmentio/kafka-go.newMessageSetReader
+         0     0% 206.37%   1115476B 11.77%  github.com/segmentio/kafka-go/protocol.(*Conn).RoundTrip
+         0     0% 206.37%   1115476B 11.77%  github.com/segmentio/kafka-go/protocol.(*encoder).Write
+         0     0% 206.37%   1115476B 11.77%  github.com/segmentio/kafka-go/protocol.(*encoder).writeInt32 (inline)
+         0     0% 206.37%   1115476B 11.77%  github.com/segmentio/kafka-go/protocol.(*pageBuffer).Write
+         0     0% 206.37%   1115476B 11.77%  github.com/segmentio/kafka-go/protocol.(*pageBuffer).newPage (inline)
+         0     0% 206.37%   2097536B 22.13%  github.com/segmentio/kafka-go/protocol.Register
+         0     0% 206.37%   1115476B 11.77%  github.com/segmentio/kafka-go/protocol.RoundTrip
+         0     0% 206.37%   1115476B 11.77%  github.com/segmentio/kafka-go/protocol.WriteRequest
+         0     0% 206.37%   1048768B 11.06%  github.com/segmentio/kafka-go/protocol.arrayDecodeFuncOf
+         0     0% 206.37%   1573088B 16.60%  github.com/segmentio/kafka-go/protocol.decodeFuncOf
+         0     0% 206.37%    524448B  5.53%  github.com/segmentio/kafka-go/protocol.encodeFuncOf
+         0     0% 206.37%   2097528B 22.13%  github.com/segmentio/kafka-go/protocol.forEach
+         0     0% 206.37%   2097528B 22.13%  github.com/segmentio/kafka-go/protocol.forEachStructField
+         0     0% 206.37%   2097528B 22.13%  github.com/segmentio/kafka-go/protocol.forEachStructTag
+         0     0% 206.37%   2097528B 22.13%  github.com/segmentio/kafka-go/protocol.forEachStructTag.func1
+         0     0% 206.37%   2097536B 22.13%  github.com/segmentio/kafka-go/protocol.makeTypes
+         0     0% 206.37%   1573080B 16.60%  github.com/segmentio/kafka-go/protocol.structDecodeFuncOf.func1
+         0     0% 206.37%    524448B  5.53%  github.com/segmentio/kafka-go/protocol.structEncodeFuncOf
+         0     0% 206.37%    524448B  5.53%  github.com/segmentio/kafka-go/protocol.structEncodeFuncOf.func1
+         0     0% 206.37%   2097536B 22.13%  github.com/segmentio/kafka-go/protocol.typesOf
+         0     0% 206.37%    524448B  5.53%  github.com/segmentio/kafka-go/protocol/createacls.init.0
+         0     0% 206.37%    524312B  5.53%  github.com/segmentio/kafka-go/protocol/createtopics.init.0
+         0     0% 206.37%    524312B  5.53%  github.com/segmentio/kafka-go/protocol/findcoordinator.init.0
+         0     0% 206.37%    524448B  5.53%  github.com/segmentio/kafka-go/protocol/metadata.init.0
+         0     0% 206.37%    566314B  5.97%  orderservice/internal/kafka.EmulateMsgSending.func2
+         0     0% 206.37%  -1589706B 16.77%  orderservice/internal/kafka.StartConsumer
+         0     0% 206.37%   2114346B 22.31%  orderservice/internal/kafka.StartConsumer.func3
+         0     0% 206.37%    524320B  5.53%  reflect.PointerTo (inline)
+         0     0% 206.37%    524320B  5.53%  reflect.PtrTo (inline)
+         0     0% 206.37%   -524992B  5.54%  regexp.Compile (inline)
+         0     0% 206.37%   -524992B  5.54%  regexp.MustCompile
+         0     0% 206.37%   -524992B  5.54%  regexp.compile
+         0     0% 206.37%   -524992B  5.54%  regexp/syntax.(*compiler).cap (inline)
+         0     0% 206.37%   -524992B  5.54%  regexp/syntax.(*compiler).compile
+         0     0% 206.37%   -524992B  5.54%  regexp/syntax.Compile
+         0     0% 206.37%   -524336B  5.53%  runtime.bgscavenge
+         0     0% 206.37%   1035873B 10.93%  runtime.doInit (inline)
+         0     0% 206.37%   1035873B 10.93%  runtime.doInit1
+         0     0% 206.37%   1035873B 10.93%  runtime.main
+         0     0% 206.37%   -525312B  5.54%  runtime.mcall
+         0     0% 206.37%   -525313B  5.54%  runtime.mstart
+         0     0% 206.37%   -525313B  5.54%  runtime.mstart0
+         0     0% 206.37%   -525313B  5.54%  runtime.mstart1
+         0     0% 206.37%  -1050625B 11.08%  runtime.newm
+         0     0% 206.37%   -525312B  5.54%  runtime.park_m
+         0     0% 206.37%  -1050625B 11.08%  runtime.resetspinning
+         0     0% 206.37%  -1050625B 11.08%  runtime.schedule
+         0     0% 206.37%  -1050625B 11.08%  runtime.startm
+         0     0% 206.37%  -1050625B 11.08%  runtime.wakep
+         0     0% 206.37%    528394B  5.57%  runtime/pprof.(*profileBuilder).addCPUData
+         0     0% 206.37%    528394B  5.57%  runtime/pprof.profileWriter
+         0     0% 206.37%    557738B  5.88%  sync.(*Pool).Get
